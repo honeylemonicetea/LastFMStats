@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block title %}
+ARTISTS
+{%endblock%}
+
+{% block content %}
+    <div class="artists-container">
+        {% for item in artists %}
+        <div class="artist-card" style="background-image:url({{item.artist_image}})">
+            <div class="artist-info">
+                <a href={{item.artist_url}}>{{item.artist_name}}</a>
+
+                <p>Playcount: {{item.playcount}}</p>
+                <p></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block title%}
+    hey there
+{% endblock %}
+
+
+
+{% block content %}
+
+<a href="/admin">ADMIN</a>
+        LAST FM LOGIN  HERE
+<a href="{{last_login}}">click</a>
+<a href='{% url "view_artists" %}'>SEE ARTISTS</a>
+{% endblock %}

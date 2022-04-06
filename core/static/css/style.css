@@ -1,0 +1,49 @@
+@import url('')
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+   background-color: #cdcdcd;
+
+}
+
+.artist-card{
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden
+}
+
+.artists-container{
+    width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 50px auto;
+
+}
+.artist-info{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.8));
+    position: absolute;
+    bottom: -90px;
+    color: white;
+    width: 100%;
+    padding: 5%;
+    transition: 0.5s;
+}
+.artist-card:hover .artist-info{
+    bottom: 0
+}
+
+.artist-info a{
+    font-size: 1.3em;
+    color: white;
+    text-decoration: none;
+}
