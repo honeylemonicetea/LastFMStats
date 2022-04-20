@@ -1,0 +1,213 @@
+/* THE FORM */
+.form-container{
+   
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 2% 0;
+    text-transform: uppercase;
+
+}
+
+.form-container input{
+    padding: 15px;
+    border-radius: 5px;
+    margin: 2% 0.5%;
+    border: none;
+    outline: none;
+}
+.form-container input[type=text]{
+    width: 35%;
+}
+.form-container input[type=submit]{
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+
+}
+.form-container input[type=submit]:hover{
+    background-color: rgb(66, 69, 66);
+}
+
+/* ARTIST top 3 */
+.top-three h1, .greeting h1{
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 3%;
+
+}
+
+hr{
+    border: 2px solid rgb(127, 126, 126);
+    border-radius: 2px;
+    margin-bottom: 3%;
+}
+
+
+.top-three{
+    /* border: 1px solid; */
+    /* height: 200px; */
+    width: 60%;
+    margin: auto;
+    padding: 2%;
+}
+
+
+.one-pic{
+    background-size: cover;
+    width: 400px;
+    height: 400px;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    background-position: center;
+
+}
+
+.number-one{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.one-info{
+    max-width: fit-content;
+    width: 51%;
+}
+
+.two-three{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1vw;
+    margin: 2vh 0;
+}
+
+.runner-up{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.two-pic{
+     background-size: cover;
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+     background-position: center;
+
+}
+
+/* ARTIST  - ALBUM GRIDS AND CARDS */
+
+.greeting{
+    font-size: 1.5em;
+    width: 50%;
+    margin: auto;
+}
+
+.artist-card, .album-card{
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden
+}
+
+.flag-smaller{
+    width: 30px
+}
+
+.artists-container, .albums-container{
+    width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin: 50px auto;
+
+}
+.artist-info, .album-info{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.8));
+    position: absolute;
+    bottom: -110px;  /* */
+    color: white;
+    width: 100%;
+    padding: 5%;
+    transition: 0.5s;
+}
+.artist-card:hover .artist-info, .album-card:hover .album-info{
+    bottom: 0
+}
+
+.artist-info a, .album-info a{
+    font-size: 1.3em;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* TRACKS CHART */
+
+.chart-container{
+    width: 60%;
+    margin: auto;
+}
+
+.track-container{
+    border: solid 1px grey;
+    background-color: #f1f1f1;
+    display: flex
+}
+
+.track-num{
+    background-color: black;
+    font-size: 2em;
+    color: white;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+
+}
+
+
+.track-cover{
+   width: 150px;
+   height: 150px;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+
+
+}
+
+
+.track-info{
+    padding: 2%;
+}
+
+.track-name{
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.track-artist{
+    font-size: 1.4em;
+}
+
+/*PROFILE CONTAINER*/
+.profile-container{
+    width: 70vw;
+    margin: auto;
+    display: flex;
+}
+
+.user-image{
+    width: 20vw;
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 4vw;
+    background-position: center;
+}

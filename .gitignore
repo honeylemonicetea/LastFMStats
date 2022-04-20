@@ -1,4 +1,6 @@
 .env
-
+core/tools/IGNORE_archived.py
+core/tools/arianas_cyberhex.py
+core/tools/plastic.py
 
 

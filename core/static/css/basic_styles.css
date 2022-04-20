@@ -1,0 +1,37 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+body{
+   background-color: #d4f6f5;
+   font-family: 'Rajdhani', sans-serif;
+
+}
+
+.main__container{
+    margin-top: 7vh;
+    /* border: solid 1px; */
+    /* height: 20vh; */
+}
+
+/* MENU */
+.menu{
+    background-color: black;
+    position: fixed;
+    padding: 1%;
+    width: 100%;
+    top: 0;
+    z-index: 20;
+}
+.menu a{
+    font-size: 1.3em;
+    color: white;
+    padding: 0 2%;
+    display: inline-block;
+    font-weight: 600;
+
+}

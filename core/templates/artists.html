@@ -5,11 +5,74 @@ ARTISTS
 {%endblock%}
 
 {% block content %}
+    <div class="form-container">
+        <h1>enter your last.fm username</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p><input type="text" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
+
+        </form>
+        
+    </div>
+
+    {% if one_pic %}
+    <div class="top-three">
+        <h1>Here's Your Top 3</h1>
+        <div class="number-one">
+            <div class="one-pic" style="background-image:url({{one_pic}})"></div>
+            <div class="one-info">
+                    <h1 class="top_name">{{top_one_dict.artist_name}}</h1>
+                    <hr>
+                    <p><b>Founded In</b> {{top_one_dict.artist_city}}, {{top_one_dict.artist_country}}</p>
+                    <p><b>Years Active:</b>{{top_one_dict.artist_begin}} -
+                        {% if top_one_dict.artist_end %}
+                            {{top_one_dict.artist_end}}
+                        {% else %}
+                         present
+                        {% endif %}
+                    </p>
+                    <p class="bio">{{top_one_dict.artist_bio | slice:":600"}}...</p>
+                    <p class="playcount"><b>Total Scrobbles</b>: {{top_one_dict.playcount}}</p>
+                    <p class="playcount"><b>Your Scrobbles</b>: {{playcount_one}}</p>
+                    <p class="listeners"><b>Listeners</b>: {{top_one_dict.listeners}}</p>
+                    <p class="ratio"><b>Ratio</b>: {{top_one_dict.ratio}}</p>
+                    <p><b>Genres: </b>{{top_one_dict.genres}}</p>
+                    <p><b>Top Tracks: </b>
+                            {%for track in top_one_dict.top_tracks%}
+                                <p>  {{track.num}}.    {{track.name}}</p>
+                            {% endfor %}
+
+                    </p>
+            </div>
+        </div>
+        <div class="two-three">
+            {% for artist in  top_two%}
+            <div class="runner-up">
+                 <div class="two-pic" style="background-image:url({{artist.artist_image}})"></div>
+                <div class="two-info">
+                      <h1 class="top_name">{{artist.artist_name}} </h1>
+                    <hr>
+                    <p class="playcount"><b>Your Scrobbles: </b>{{artist.playcount}}</p>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {%endif%}
+    <div class="greeting">
+           <h1>{{greeting}}</h1>
+    </div>
     <div class="artists-container">
+
         {% for item in artists %}
         <div class="artist-card" style="background-image:url({{item.artist_image}})">
             <div class="artist-info">
-                <a href={{item.artist_url}}>{{item.artist_name}}</a>
+                <a href={{item.artist_url}}>{{item.artist_name}}
+                    {% if item.flag != 'None' %}
+                        <img class="flag-smaller" src="{{item.flag}}">
+                    {% endif %}
+                </a>
 
                 <p>Playcount: {{item.playcount}}</p>
                 <p></p>
