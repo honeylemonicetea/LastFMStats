@@ -39,7 +39,7 @@ SECURE_SSL_REDIRECT = False
 CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = [
-    '.example.com',
+    '*.herokuapp.com',
     '127.0.0.1'
 ]
 # ALLOWED_HOSTS = []  DEV
