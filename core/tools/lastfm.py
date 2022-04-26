@@ -35,7 +35,7 @@ headers = {
 
 def get_artists(username):
     artists = []
-    r = requests.get(API_ROOT, params={'api_key':env('API_KEY'), 'user':username, 'format':'json', 'method':'library.getartists', 'limit':'100'})
+    r = requests.get(API_ROOT, params={'api_key':env('API_KEY'), 'user':username, 'format':'json', 'method':'library.getartists', 'limit':'50'})
     content = r.json()
     for i in range(100):
         try:
@@ -49,14 +49,14 @@ def get_artists(username):
                     artist_image = get_artist_image(artist_name)
             except Exception:
                 artist_image = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
-            artist_country, artist_city, artist_begin, artist_end, inactive = get_mb_info(artist_name)
-            flag_url = get_country_flag(artist_country)
+            # artist_country, artist_city, artist_begin, artist_end, inactive = get_mb_info(artist_name)   TODO: ENABLE IN DEV, GIVES TIMEOUT ERROR ON PROD
+            # flag_url = get_country_flag(artist_country)
             artist_info['id'] = i+1
             artist_info['artist_name'] = artist_name
             artist_info['playcount'] = artist_playcount
             artist_info['artist_url'] = artist_url
             artist_info['artist_image'] = artist_image
-            artist_info['flag'] = flag_url
+            # artist_info['flag'] = flag_url
             artists.append(artist_info)
         except IndexError:
             print('index error')

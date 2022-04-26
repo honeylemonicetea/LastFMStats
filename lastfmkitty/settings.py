@@ -41,6 +41,7 @@ CSRF_COOKIE_SECURE = True
 ALLOWED_HOSTS = [
     "*"
 ]
+
 # ALLOWED_HOSTS = []  DEV
 
 
