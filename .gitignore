@@ -3,4 +3,9 @@ core/tools/IGNORE_archived.py
 core/tools/arianas_cyberhex.py
 core/tools/plastic.py
 
+# Text backup files
+*.bak
+
+# Database
+*.sqlite3
 
