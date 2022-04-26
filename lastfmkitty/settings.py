@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import environ
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,20 +20,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&nj&y7gacew@41l#6elf01)9w$7^!3@-3&f23j)+a9)*7*5y3m'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
 #initialize environment vars
 
-env = environ.Env()
-environ.Env.read_env()
+
+# SECURITY WARNING: keep the secret key used in production secret!
+
+SECRET_KEY = os.getenv('SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+
+# SESSION_COOKIE_SECURE = False    DEV
+# SECURE_SSL_REDIRECT = False
+# CSRF_COOKIE_SECURE = False
+
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False
+CSRF_COOKIE_SECURE = True
+
+ALLOWED_HOSTS = [
+    '.example.com',
+    '127.0.0.1'
+]
+# ALLOWED_HOSTS = []  DEV
+
 
 
 # Application definition

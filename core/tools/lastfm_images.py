@@ -7,7 +7,7 @@ IMAGE_BASE = 'https://lastfm.freetls.fastly.net/i/u/770x0/'
 def get_image(artist_name):
     if " " in artist_name:
         artist_name = artist_name.replace(" ", "+")
-    response = requests.get(f"{BASE_URL}{artist_name}?shoutbox-sort=newest#shoutbox")
+    response = requests.get(f"{BASE_URL}{artist_name}")
     soup = BeautifulSoup(response.text, 'lxml')
 #         header-new-gallery--link    class
     element = soup.find(class_ = 'header-new-gallery--link')

@@ -7,13 +7,15 @@
 
 
 body{
-   background-color: #d4f6f5;
+   background-color: #1d1e1e;
    font-family: 'Rajdhani', sans-serif;
+   color: rgb(255, 255, 255);
 
 }
 
 .main__container{
-    margin-top: 7vh;
+    margin: 6.5vh 0;
+    min-height: 66.5vh;
     /* border: solid 1px; */
     /* height: 20vh; */
 }
@@ -33,5 +35,45 @@ body{
     padding: 0 2%;
     display: inline-block;
     font-weight: 600;
+
+}
+
+
+/* footer */
+footer{
+    background-color: rgb(85, 85, 85);
+    padding: 2%;
+}
+
+.footer-container{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+}
+.link-container{
+    display: flex;
+    justify-content: space-around;
+    width: 35%;
+}
+
+.links{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.footer-container a{
+    color: white;
+}
+
+.contact-container a{
+    text-align: center;
+}
+
+.contact-container img{
+    width: 2vw;
+
 
 }

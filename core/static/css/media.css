@@ -1,0 +1,142 @@
+@media (max-width: 420px) {
+        
+        /* MENU */
+        .menu{
+            position: static;
+            height: 100vh;
+        }
+        .menu a{
+            display: block;
+            font-size: 4em;
+            line-height: 200%;
+        }
+        
+        
+        /* MAIN PAGE HEADER */
+        .main__container{
+            margin: 0;
+        }
+
+        .home-banner{
+            background-size: cover;
+            background-position: left;
+        }
+        .banner-text{
+            text-align: center;
+        }
+
+        
+        
+        /* FOOTER */
+        .link-container{
+            flex-direction: column;
+            font-size: 2em;
+            width: 100%;
+        }
+        .link-container .links{
+            margin: 2vh 0;
+        }
+
+
+        .footer-container{
+            flex-direction: column;
+        }
+        .contact-container img{
+            width: 10vw;
+
+        }        
+        
+        
+        /* FORM */
+        .form-container{
+            width: 100%;
+        }
+
+        form{
+            width: 70%;
+            margin: 5vh auto;
+        }
+        .form-container input[type=text], .form-container input{
+            display: block;
+            width: 100%;
+            margin-bottom: 2vh;
+        }
+
+        /* ARTISTS */
+        .top-three{
+            margin: 0;
+            width: 100%;
+            padding: 2vw;
+        }
+        
+        .number-one{
+            flex-direction: column;
+        }
+        .one-pic{
+            width: 100%;
+        
+        }
+
+        .one-info{
+            width: 100%;
+            padding: 0 1vw;
+        }
+        .two-three{
+            grid-template-columns: 1fr;
+        }
+        .runner-up{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .two-info{
+            text-align: center;
+            padding: 0 1vw;
+        }
+
+        .greeting{
+            width: 95%;
+        }
+        .artists-container, .albums-container{
+            width: 100%;
+            grid-template-columns:  1fr;
+            padding: 0 1vw;
+        }
+        .artist-card, .album-card{
+            width: auto;
+            height: 45vh;
+
+        }
+
+       /* TRACK CHARTS */
+       .chart-container{
+           width: 100%;
+       }
+       .track-num{
+           width: 6vw;
+           font-size: 1.5em;
+       }
+       .track-container{
+           width: 100%;
+       }
+       .track-info{
+           width: 50%;
+       }
+
+
+       /* PROFILE */
+       .profile-container{
+           width: 95vw;
+           flex-direction: column;
+           padding: 2vh 1vw;
+       }
+       .user-image{
+           width: 100%;
+       }
+       .user-info h1{
+           text-align: center;
+       }
+       .user-info a{
+           color: white;
+       }
+
+}
