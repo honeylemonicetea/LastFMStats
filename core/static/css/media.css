@@ -104,7 +104,7 @@
         }
         .artist-card, .album-card{
             width: auto;
-            height: 52vh;
+            height: 60vh;
             /* background-size: contain; */
             /* background-repeat: no-repeat; */
             background-color: black;
