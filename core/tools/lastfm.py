@@ -35,7 +35,7 @@ headers = {
 
 def get_artists(username):
     artists = []
-    r = requests.get(API_ROOT, params={'api_key':env('API_KEY'), 'user':username, 'format':'json', 'method':'library.getartists', 'limit':'50'})
+    r = requests.get(API_ROOT, params={'api_key':env('API_KEY'), 'user':username, 'format':'json', 'method':'library.getartists', 'limit':'100'})
     content = r.json()
     for i in range(100):
         try:
@@ -44,9 +44,12 @@ def get_artists(username):
             artist_playcount = content['artists']['artist'][i]['playcount']
             artist_url = content['artists']['artist'][i]['url']
             try:
-                artist_image, code = get_image(artist_name)
-                if code != 200:
-                    artist_image = get_artist_image(artist_name)
+                if i < 3:  #TODO: LIMIING SCRAPING FROM LASTFM DUE TO TIMEOUT ISSUES
+                    artist_image, code = get_image(artist_name)  #gets the image from last fm
+                    if code != 200:
+                        artist_image = get_artist_image(artist_name)  #gets the image from spotify
+                else:
+                    artist_image = get_artist_image(artist_name) #gets the image from spotify
             except Exception:
                 artist_image = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
             # artist_country, artist_city, artist_begin, artist_end, inactive = get_mb_info(artist_name)   TODO: ENABLE IN DEV, GIVES TIMEOUT ERROR ON PROD
