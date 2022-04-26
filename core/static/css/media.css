@@ -7,8 +7,8 @@
         }
         .menu a{
             display: block;
-            font-size: 4em;
-            line-height: 200%;
+            font-size: 3.5em;
+            line-height: 160%;
         }
         
         
@@ -18,8 +18,9 @@
         }
 
         .home-banner{
-            background-size: cover;
-            background-position: left;
+            background-image: none;
+            background-color: white;
+            width: 100%;
         }
         .banner-text{
             text-align: center;
