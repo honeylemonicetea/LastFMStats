@@ -1,17 +1,98 @@
 @media (max-width: 420px) {
         
         /* MENU */
+
+        /* hidden */
         .menu{
-            position: static;
+            
             height: 100vh;
             width: 100%;
+            
+           
         }
+
+
+
         .menu a{
             display: block;
             font-size: 3.5em;
             line-height: 160%;
         }
+        .main-menu{
+            display: none;
+        }
+        .burger-menu{
+            display: block;
+            position: fixed;
+            left: -100%;
+        }
+        .burger-menu-op{
+            left: 0;
+        }
         
+        /* menu button */
+        
+        .menu-button{
+            position: absolute;
+      
+            top: 5%;
+            left: 5%;
+            width: 60px;
+            height: 60px;
+        }
+        .button-stripes{
+            display: inline-block;
+            width: 40px;
+            height: 6px;
+            background-color: rgb(255, 255, 255);
+            
+           
+        }
+        .button-stripes::before{
+            content: "";
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px solid white;
+            width: 40px;
+            height: 6px;
+            top: -20px;
+            right: 0;
+            background-color: rgb(255, 255, 255);
+
+        }
+        .button-stripes::after{
+            content: "";
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px solid white;
+            width: 40px;
+            height: 6px;
+            top: -18px;
+            right: 0;
+            background-color: rgb(255, 255, 255);
+
+        }
+        .button-close{
+            z-index: 100;
+            left: 80%;
+            position: absolute;
+
+        }
+
+        .stripe-x{
+            transform: rotate(45deg);
+        }
+        .stripe-x::after{
+            display: none;
+        }
+        .stripe-x::before{
+            transform: rotate(90deg);
+            top: -8px;
+        }
+
+
+
+
         
         /* MAIN PAGE HEADER */
         .main__container{
@@ -20,11 +101,14 @@
 
         .home-banner{
             background-image: none;
-            background-color: white;
+            background-color: rgb(0, 0, 0);
             width: 100%;
+            
         }
         .banner-text{
             text-align: center;
+            color: white;
+            backdrop-filter: none;
         }
 
         
@@ -125,15 +209,10 @@
            grid-template-columns: 1fr 3fr 5fr
        }
        .track-num{
-           
-            width: auto;
-           padding: 10px;
-           min-width: 20%;
-
+        width: auto;
+        padding: 10px;
+        min-width: 20%;
        }
-       
-
-
       .track-name{
           font-size: 1.2em;
       }

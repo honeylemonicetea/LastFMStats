@@ -29,6 +29,11 @@ body{
     top: 0;
     z-index: 20;
 }
+
+.burger-menu{
+    display: none;
+}
+
 .menu a{
     font-size: 1.3em;
     color: white;

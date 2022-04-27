@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="https://cdn-icons.flaticon.com/png/512/2995/premium/2995101.png?token=exp=1650579845~hmac=5cc2e5c409591085283361aa2ec314f4" type="image/x-icon">
 </head>
 <body>
-    <div class="menu">
+    <div class="menu main-menu">
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'view_artists' %}">Artists</a>
         <a href="{% url 'view_albums' %}">Albums</a>
@@ -23,7 +23,20 @@
         <a href="{% url 'profile' %}">Your Profile</a>
          <!-- <a href="">SOMETHING ELSE</a>
         <a href="/admin">ADMIN REMOVE THIS LATER</a> -->
+    </div> 
+    <div class="menu-button burger-menu">
+         <span class="button-stripes"></span>
     </div>
+    <div class="burger-menu menu" id="burger-menu">
+       
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'view_artists' %}">Artists</a>
+        <a href="{% url 'view_albums' %}">Albums</a>
+        <a href="{% url 'tracks' %}">Tracks</a>
+        <a href="{% url 'profile' %}">Your Profile</a>
+    </div>
+
+
     <div class="main__container">
         {%block content%}
             content goes here
@@ -80,4 +93,23 @@
         </div>
     </footer>
 </body>
+
+
+<script>
+    let btn = document.querySelector('.button-stripes')
+    let menu = document.querySelector('#burger-menu')
+    btn.onclick = function(){
+        btn.classList.toggle('stripe-x')
+        if (btn.classList.contains('stripe-x')){
+            menu.classList.add('burger-menu-op')
+            btn.parentElement.classList.add('button-close')
+        }
+        else{
+             menu.classList.remove('burger-menu-op')
+            btn.parentElement.classList.remove('button-close')
+        }
+    }
+
+
+</script>
 </html>
