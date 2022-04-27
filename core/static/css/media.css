@@ -117,19 +117,33 @@
        /* TRACK CHARTS */
        .chart-container{
            width: 100%;
-       }
-       .track-num{
-           width: 6vw;
-           font-size: 1.5em;
+           max-width: 100vw;
        }
        .track-container{
            width: 100%;
+           display: grid;
+           grid-template-columns: 1fr 3fr 5fr
        }
-       .track-info{
-           width: 50%;
-           font-size: 0.8em;
-       }
+       .track-num{
+           
+            width: auto;
+           padding: 10px;
+           min-width: 20%;
 
+       }
+       
+
+
+      .track-name{
+          font-size: 1.2em;
+      }
+      .track-artist{
+          font-size: 1.1em;
+      }
+      .track-album-name{
+          font-size: 0.9em;
+      }
+      
 
        /* PROFILE */
        .profile-container{
