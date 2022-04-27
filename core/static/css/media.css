@@ -4,6 +4,7 @@
         .menu{
             position: static;
             height: 100vh;
+            width: 100%;
         }
         .menu a{
             display: block;
@@ -62,7 +63,9 @@
             width: 100%;
             margin-bottom: 2vh;
         }
-
+        .form-container input[type=submit]{
+            padding: 20px;
+        }
         /* ARTISTS */
         .top-three{
             margin: 0;
@@ -124,6 +127,7 @@
        }
        .track-info{
            width: 50%;
+           font-size: 0.8em;
        }
 
 
