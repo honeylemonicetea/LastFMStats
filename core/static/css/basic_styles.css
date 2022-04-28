@@ -1,84 +1,101 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  scroll-behavior: smooth;
 }
 
-
-body{
-   background-color: #1d1e1e;
-   font-family: 'Rajdhani', sans-serif;
-   color: rgb(255, 255, 255);
-
+body {
+  background-color: #1d1e1e;
+  font-family: "Rajdhani", sans-serif;
+  color: rgb(255, 255, 255);
 }
 
-.main__container{
-    margin: 6.5vh 0;
-    min-height: 66.5vh;
-    /* border: solid 1px; */
-    /* height: 20vh; */
+.main__container {
+  margin: 6.5vh 0;
+  min-height: 66.5vh;
+  /* border: solid 1px; */
+  /* height: 20vh; */
 }
 
 /* MENU */
-.menu{
-    background-color: black;
-    position: fixed;
-    padding: 1%;
-    width: 100%;
-    top: 0;
-    z-index: 20;
+.menu {
+  background-color: black;
+  position: fixed;
+  padding: 1%;
+  width: 100%;
+  top: 0;
+  z-index: 20;
 }
 
-.burger-menu{
-    display: none;
+.burger-menu {
+  display: none;
 }
 
-.menu a{
-    font-size: 1.3em;
-    color: white;
-    padding: 0 2%;
-    display: inline-block;
-    font-weight: 600;
-
+.menu a {
+  font-size: 1.3em;
+  color: white;
+  padding: 0 2%;
+  display: inline-block;
+  font-weight: 600;
 }
-
 
 /* footer */
-footer{
-    background-color: rgb(85, 85, 85);
-    padding: 2%;
+footer {
+  background-color: rgb(85, 85, 85);
+  padding: 2%;
 }
 
-.footer-container{
-    width: 80%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-
+.footer-container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
-.link-container{
-    display: flex;
-    justify-content: space-around;
-    width: 35%;
-}
-
-.links{
-    display: flex;
-    flex-direction: column;
+.link-container {
+  display: flex;
+  justify-content: space-around;
+  width: 35%;
 }
 
-
-.footer-container a{
-    color: white;
+.links {
+  display: flex;
+  flex-direction: column;
 }
 
-.contact-container a{
-    text-align: center;
+.footer-container a {
+  color: white;
 }
 
-.contact-container img{
-    width: 2vw;
+.contact-container a {
+  text-align: center;
+}
 
+.contact-container img {
+  width: 2vw;
+}
 
+/* BACK TO TOP BUTTON */
+
+.back-to-top {
+  width: 65px;
+  height: 65px;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+    .back-to-top:hover{
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.5);
+
+    }
+
+.back-to-top img {
+  width: 100%;
+  height: 100%;
 }

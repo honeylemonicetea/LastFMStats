@@ -25,6 +25,7 @@
             display: block;
             position: fixed;
             left: -100%;
+            padding: 5% 0;
         }
         .burger-menu-op{
             left: 0;
@@ -97,11 +98,12 @@
         /* MAIN PAGE HEADER */
         .main__container{
             margin: 0;
+            padding: 20% 0;
         }
 
         .home-banner{
             background-image: none;
-            background-color: rgb(0, 0, 0);
+            /* background-color: rgb(0, 0, 0); */
             width: 100%;
             
         }
