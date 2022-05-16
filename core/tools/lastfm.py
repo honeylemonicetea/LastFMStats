@@ -35,7 +35,7 @@ headers = {
 
 def get_artists(username):
     artists = []
-    r = requests.get(API_ROOT, params={'api_key':env('API_KEY'), 'user':username, 'format':'json', 'method':'library.getartists', 'limit':'70'})
+    r = requests.get(API_ROOT, params={'api_key':env('API_KEY'), 'user':username, 'format':'json', 'method':'library.getartists', 'limit':'72'})
     content = r.json()
     for i in range(100):
         try:
