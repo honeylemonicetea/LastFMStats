@@ -146,9 +146,6 @@ def get_more_inf_ART(artist_name):
     return artist_country, flag_url
 
 
-
-
-
 def get_albums(username):
     albums = []
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
@@ -168,10 +165,6 @@ def get_albums(username):
         album_info['album_image'] = album_image
         album_info['artist'] = artist_name
         albums.append(album_info)
-    # TODO: FOR TESTING
-    # with open("ALBUMS.json", 'w', encoding='utf-8') as file:
-    #     file.write(str(albums))
-
     return albums
 
 
@@ -187,46 +180,46 @@ def album_more_info(album_name, artist_name):
     return playcount, listener_count, ratio, description
 
 
-def top_three_albums(username):
-    r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
-                                       'method': 'user.gettopalbums', 'period': 'overall', 'limit': '3'})
-    content = r.json()
-    two_albs = []
-    top_one = dict()
-    for i in range(3):
-        album_info = dict()
-        album_title = content['topalbums']['album'][i]['name']
-        album_playcount = content['topalbums']['album'][i]['playcount']
-        album_url = content['topalbums']['album'][i]['url']
-        album_image = content['topalbums']['album'][i]['image'][3]['#text']
-        artist_name = content['topalbums']['album'][i]['artist']['name']
-        if i == 0:
-            top_one['id'] = i + 1
-            top_one['album_name'] = album_title
-            top_one['your_playcount'] = album_playcount  # user's playcount
-            top_one['album_url'] = album_url
-            top_one['album_image'] = album_image
-            playcount, listener_count, ratio, description = album_more_info(album_title, artist_name)
-            top_one['playcount'] = playcount  # total playcount
-            top_one['ratio'] = ratio
-            top_one['listener_count'] = listener_count
-            top_one['description'] = description
-            top_one['artist'] = artist_name
-        else:
-            album_info['id'] = i + 1
-            album_info['album_name'] = album_title
-            album_info['playcount'] = album_playcount
-            album_info['album_url'] = album_url
-            album_info['album_image'] = album_image
-            album_info['artist'] = artist_name
-            two_albs.append(album_info)
-    # TODO: FOR TESTING
-    # with open("TWO_AL.json", 'w', encoding='utf-8') as file:
-    #     file.write(str(two_albs))
-    # with open("one_AL.json", 'w',  encoding='utf-8') as file:
-    #     file.write(str(top_one))
-
-    return two_albs, top_one
+# def top_three_albums(username):
+#     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
+#                                        'method': 'user.gettopalbums', 'period': 'overall', 'limit': '3'})
+#     content = r.json()
+#     two_albs = []
+#     top_one = dict()
+#     for i in range(3):
+#         album_info = dict()
+#         album_title = content['topalbums']['album'][i]['name']
+#         album_playcount = content['topalbums']['album'][i]['playcount']
+#         album_url = content['topalbums']['album'][i]['url']
+#         album_image = content['topalbums']['album'][i]['image'][3]['#text']
+#         artist_name = content['topalbums']['album'][i]['artist']['name']
+#         if i == 0:
+#             top_one['id'] = i + 1
+#             top_one['album_name'] = album_title
+#             top_one['your_playcount'] = album_playcount  # user's playcount
+#             top_one['album_url'] = album_url
+#             top_one['album_image'] = album_image
+#             playcount, listener_count, ratio, description = album_more_info(album_title, artist_name)
+#             top_one['playcount'] = playcount  # total playcount
+#             top_one['ratio'] = ratio
+#             top_one['listener_count'] = listener_count
+#             top_one['description'] = description
+#             top_one['artist'] = artist_name
+#         else:
+#             album_info['id'] = i + 1
+#             album_info['album_name'] = album_title
+#             album_info['playcount'] = album_playcount
+#             album_info['album_url'] = album_url
+#             album_info['album_image'] = album_image
+#             album_info['artist'] = artist_name
+#             two_albs.append(album_info)
+#     # TODO: FOR TESTING
+#     # with open("TWO_AL.json", 'w', encoding='utf-8') as file:
+#     #     file.write(str(two_albs))
+#     # with open("one_AL.json", 'w',  encoding='utf-8') as file:
+#     #     file.write(str(top_one))
+#
+#     return two_albs, top_one
 
 # gets more info on the artist
 
@@ -238,6 +231,7 @@ def get_top_tracks(username):
                                        'method': 'user.getTopTracks', 'period': 'overall', 'limit': '100'})
     content = r.json()['toptracks']['track']
     tracks = []
+    start = time.time()
     for i in range(100):
         try:
             track = dict()
@@ -245,7 +239,14 @@ def get_top_tracks(username):
             track_name = content[i]['name']
             artist_name = content[i]['artist']['name']
             try:
-                album_name, album_cover = get_track_info(track_name, artist_name)
+                # album_name, album_cover = get_track_info(track_name, artist_name)   #gets the info from spotify
+
+                req = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'track': track_name, 'artist': artist_name,
+                                   'format': 'json', 'method':'track.getInfo', 'period':'overall', 'limit': '1'})
+                req_content = req.json()['track']
+                album_name = req_content['album']['title']
+                album_cover = req_content['album']['image'][3]['#text']
+
             except Exception:
                 album_name = 'Unknown'
                 album_cover = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
@@ -258,6 +259,7 @@ def get_top_tracks(username):
             tracks.append(track)
         except IndexError:
             print('index error')
+    print(f'time spent {time.time() - start}')
 
     return tracks
 

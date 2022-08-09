@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .tools.lastfm import  get_artists, get_albums, get_top3_ART, get_more_inf_ART, top_three_albums, get_top_tracks, get_user
+from .tools.lastfm import  get_artists, get_albums, get_top3_ART, get_top_tracks, get_user
 from .forms import LFMUser
 from .models import LastfmUser
 
@@ -33,7 +33,6 @@ def view_artists(request):
         # info about the number one artist
         greeting = f'Hi, {username}, here is your Top 100 artists grid'
 
-
         return render(request, 'artists.html', {'artists':artists, 'greeting':greeting,  'top_three':top_three})
 
 def view_albums(request):
@@ -43,10 +42,10 @@ def view_albums(request):
         username = request.POST['username']
         albums = get_albums(username)
         greeting = f'Hi, {username}, here is your Top 100 albums grid'
-        two_albs, top_one = top_three_albums(username)
+        # two_albs, top_one = top_three_albums(username)
 
 
-        return render(request, 'albums.html', {'albums': albums, 'greeting': greeting, 'two_albs': two_albs, 'top_one':top_one })
+        return render(request, 'albums.html', {'albums': albums, 'greeting': greeting })
 
 
 def view_tracks(request):
