@@ -29,13 +29,12 @@ def view_artists(request):
     elif request.method == 'POST':
         username = request.POST['username']
         artists = get_artists(username)
-        top_three, number_one, image_one, playcount_one = get_top3_ART(username)
+        top_three = get_top3_ART(username)
         # info about the number one artist
-        top_one_dict= get_more_inf_ART(number_one)
         greeting = f'Hi, {username}, here is your Top 100 artists grid'
 
 
-        return render(request, 'artists.html', {'artists':artists, 'greeting':greeting,  'top_two':top_three, 'one_name':number_one, 'top_one_dict':top_one_dict, 'one_pic':image_one, 'playcount_one':playcount_one})
+        return render(request, 'artists.html', {'artists':artists, 'greeting':greeting,  'top_three':top_three})
 
 def view_albums(request):
     if request.method == 'GET':
@@ -70,3 +69,8 @@ def view_profile(request):
         username = request.POST['username']
         user_info = get_user(username)
         return render(request, 'profile.html', {'user_info':user_info})
+
+
+def under_construction(request):
+
+    return render(request, 'UnderConstr.html')

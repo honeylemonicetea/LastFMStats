@@ -5,62 +5,63 @@ ALBUMS
 {%endblock%}
 
 {% block content %}
-    <div class="form-container">
-        <h1>enter your last.fm username</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            <p><input type="text" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
+    <div class="content-padding">
+        <div class="form-container">
+            <h1>enter your last.fm username</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p><input type="search" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
 
-        </form>
+            </form>
 
-    </div>
-     {% if top_one.album_image %}
-    <div class="top-three">
-        <h1>Here's Your Top 3</h1>
-        <div class="number-one">
-            <div class="one-pic" style="background-image:url({{ top_one.album_image}})"></div>
-            <div class="one-info">
-                    <h1 class="top_name">{{top_one.album_name}} - {{top_one.artist}}</h1>
-                    <hr>
-                    <p class="bio">{{top_one.description | slice:":600"}}...</p>
-                    <p class="playcount"><b>Total Scrobbles</b>: {{top_one.playcount}}</p>
-                    <p class="playcount"><b>Your Scrobbles</b>: {{top_one.your_playcount}}</p>
-                    <p class="listeners"><b>Listeners</b>: {{top_one.listener_count}}</p>
-                    <p class="ratio"><b>Ratio</b>: {{top_one.ratio}}</p>
+        </div>
+         {% if top_one.album_image %}
+        <div class="top-three">
+            <h1>Here's Your Top 3</h1>
+            <div class="number-one">
+                <div class="one-pic" style="background-image:url({{ top_one.album_image}})"></div>
+                <div class="one-info">
+                        <h1 class="top_name">{{top_one.album_name}} - {{top_one.artist}}</h1>
+                        <hr>
+                        <p class="bio">{{top_one.description | slice:":600"}}...</p>
+                        <p class="playcount"><b>Total Scrobbles</b>: {{top_one.playcount}}</p>
+                        <p class="playcount"><b>Your Scrobbles</b>: {{top_one.your_playcount}}</p>
+                        <p class="listeners"><b>Listeners</b>: {{top_one.listener_count}}</p>
+                        <p class="ratio"><b>Ratio</b>: {{top_one.ratio}}</p>
+                </div>
+            </div>
+            <div class="two-three">
+                {% for album in  two_albs%}
+                <div class="runner-up">
+                     <div class="two-pic" style="background-image:url({{album.album_image}})"></div>
+                    <div class="two-info">
+                          <h1 class="top_name">{{album.album_name}} - {{album.artist}}</h1>
+                        <hr>
+                        <p class="playcount"><b>Your Scrobbles: </b>{{album.playcount}}</p>
+
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
-        <div class="two-three">
-            {% for album in  two_albs%}
-            <div class="runner-up">
-                 <div class="two-pic" style="background-image:url({{album.album_image}})"></div>
-                <div class="two-info">
-                      <h1 class="top_name">{{album.album_name}} - {{album.artist}}</h1>
-                    <hr>
-                    <p class="playcount"><b>Your Scrobbles: </b>{{album.playcount}}</p>
+        {%endif%}
 
+
+        <div class="greeting">
+               {{greeting}}
+        </div>
+
+        <div class="albums-container">
+            {% for item in albums %}
+            <div class="album-card" style="background-image:url({{item.album_image}})">
+                <div class="album-info">
+                    <a href={{item.album_url}}>{{item.album_name}}</a>
+                    <p>{{item.artist}}</p>
+                    <p>Playcount: {{item.playcount}}</p>
+                    <p></p>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-    {%endif%}
-
-
-    <div class="greeting">
-           {{greeting}}
-    </div>
-
-    <div class="albums-container">
-        {% for item in albums %}
-        <div class="album-card" style="background-image:url({{item.album_image}})">
-            <div class="album-info">
-                <a href={{item.album_url}}>{{item.album_name}}</a>
-                <p>{{item.artist}}</p>
-                <p>Playcount: {{item.playcount}}</p>
-                <p></p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
 {% endblock %}

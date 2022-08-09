@@ -7,27 +7,29 @@
 
 
 {% block content %}
-    <div class="form-container">
-        <h1>enter your last.fm username</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            <p><input type="text" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
-        </form>
-    </div>
-    <div class="profile-container">
-        {% if user_info %}
-            <div class="user-image" style="background-image:url({{user_info.image}})"></div>
-            <div class="user-info">
-                <h1>{{user_info.realName}}</h1>
-                <hr>
-                <a href="{{user_info.user_url}}"><p>{{user_info.username}}</p></a>
-                <p><b>Country: </b>{{user_info.country}} <img src="{{user_info.flag}}" alt=""> </p>
-                <p><b>Age: </b>{{user_info.age}}</p>
-                <p><b>Gender:   </b>{{user_info.gender}}</p>
-                <p><b>Playcount:   </b>{{user_info.playcount}}</p>
-                <p><b>Registered on:   </b>{{user_info.registered}}</p>
-                <p><b>Type: </b>{{user_info.user_type}}</p>
-            </div>
-        {% endif %}
+    <div class="content-padding">
+        <div class="form-container">
+            <h1>enter your last.fm username</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p><input type="search" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
+            </form>
+        </div>
+        <div class="profile-container">
+            {% if user_info %}
+                <div class="user-image" style="background-image:url({{user_info.image}})"></div>
+                <div class="user-info">
+                    <h1>{{user_info.realName}}</h1>
+                    <hr>
+                    <a href="{{user_info.user_url}}"><p>{{user_info.username}}</p></a>
+                    <p><b>Country: </b>{{user_info.country}} <img src="{{user_info.flag}}" alt=""> </p>
+                    <p><b>Age: </b>{{user_info.age}}</p>
+                    <p><b>Gender:   </b>{{user_info.gender}}</p>
+                    <p><b>Playcount:   </b>{{user_info.playcount}}</p>
+                    <p><b>Registered on:   </b>{{user_info.registered}}</p>
+                    <p><b>Type: </b>{{user_info.user_type}}</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

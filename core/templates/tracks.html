@@ -5,36 +5,34 @@ TRACKS
 {%endblock%}
 
 {% block content %}
-    <div class="form-container">
-        <h1>enter your last.fm username</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            <p><input type="text" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
+    <div class="content-padding">
+        <div class="form-container">
+            <h1>enter your last.fm username</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p><input type="search" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
+            </form>
+        </div>
 
-        </form>
-        
-    </div>
-
-    <div class="greeting">
-           <h1>{{greeting}}</h1>
-    </div>
-    <div class="chart-container">
-        {% for track in tracks %}
-            <div class="track-container">
-                <div class="track-num">
-                    {{track.num}}
+        <div class="greeting">
+               <h1>{{greeting}}</h1>
+        </div>
+        <div class="chart-container">
+            {% for track in tracks %}
+                <div class="track-container">
+                    <div class="track-num">
+                        {{track.num}}
+                    </div>
+                    <div class="track-cover" style="background-image:url({{track.album_cover}})"></div>
+                    <div class="track-info">
+                        <p class="track-name"> {{track.name}} </p>
+                        <p class="track-artist">{{track.artist}}</p>
+                        <p class="track-album-name">{{track.album_name}}</p>
+                        <p class="track-playcount">Your scrobbles: {{track.playcount}}</p>
+                    </div>
                 </div>
-                <div class="track-cover" style="background-image:url({{track.album_cover}})"></div>
-                <div class="track-info">
-                    <p class="track-name"> {{track.name}} </p>
-                    <p class="track-artist">{{track.artist}}</p>
-                    <p class="track-album-name">{{track.album_name}}</p>
-                    <p class="track-playcount">Your scrobbles: {{track.playcount}}</p>
-                </div>
-            </div>
-
-        {% endfor %}
-
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}
