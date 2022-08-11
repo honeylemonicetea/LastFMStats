@@ -53,7 +53,7 @@ def get_artists(username):
                 artist_image = ''
                 flag = ''
                 found = False
-                with open('artist_inf.csv', "r") as file:
+                with open('artist_inf.csv', "r", encoding='utf-8') as file:
                     info = file.readlines()
 
                 for line in info:
@@ -75,7 +75,7 @@ def get_artists(username):
                 # new_artist = Artist.objects.create(name=artist_name, photo_url=artist_image, last_fm_link=artist_url,
                 #                                    country = country, country_flag_url = flag)
                 # new_artist.save()
-                with open('artist_inf.csv', 'a') as file:
+                with open('artist_inf.csv', 'a', encoding='utf-8') as file:
                     file.write(f'{artist_name}|{artist_image}|{flag}|{country}\n')
 
 
