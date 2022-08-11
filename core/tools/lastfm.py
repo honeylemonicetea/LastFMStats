@@ -31,7 +31,7 @@ def get_artists(username):
     start_req = time.time()  #TODO: remove
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
                                        'method': 'library.getartists', 'limit': '100'})
-    print(f'Time spend making a request to LFM {time.time() - start_req}')
+
     content = r.json()
     start_req = time.time()
     for i in range(100):
@@ -47,17 +47,37 @@ def get_artists(username):
             # if the artists is in the db, get the info from there
             try:
                 st = time.time()
-                artist_db = Artist.objects.get(name=artist_name)
-                artist_image = artist_db.photo_url
-                flag = artist_db.country_flag_url
+                # artist_db = Artist.objects.get(name=artist_name)
+                # artist_image = artist_db.photo_url
+                # flag = artist_db.country_flag_url
+                artist_image = ''
+                flag = ''
+                found = False
+                with open('artist_inf.csv', "r") as file:
+                    info = file.readlines()
+
+                for line in info:
+                    line_split = line.split('|')
+                    if line_split[0] == artist_name:
+                        artist_image = line_split[1]
+                        flag = line_split[2]
+                        found = True
+                        break
+
+                if found == False:
+                    raise Exception
+
             except Exception:
                 artist_image = get_artist_image(artist_name)  # gets the image from spotify
                 country, flag = get_more_inf_ART(artist_name)
                 print(f'Time spent on getting one artist pic from spotify {time.time() - st}')
 
-                new_artist = Artist.objects.create(name=artist_name, photo_url=artist_image, last_fm_link=artist_url,
-                                                   country = country, country_flag_url = flag)
-                new_artist.save()
+                # new_artist = Artist.objects.create(name=artist_name, photo_url=artist_image, last_fm_link=artist_url,
+                #                                    country = country, country_flag_url = flag)
+                # new_artist.save()
+                with open('artist_inf.csv', 'a') as file:
+                    file.write(f'{artist_name}|{artist_image}|{flag}|{country}\n')
+
 
             artist_info['id'] = i + 1
             artist_info['artist_name'] = artist_name
@@ -68,7 +88,6 @@ def get_artists(username):
             artists.append(artist_info)
         except IndexError:
             print('index error')
-    print(f'Time spent compiling the dictionary {time.time() - start_req}')
     return artists
 
 def get_top3_ART(username='BellaLeto'):
@@ -111,7 +130,7 @@ def get_top3_ART(username='BellaLeto'):
 
 
         top_3_artists.append(artist_info)
-        print(f"GETTING more info artist {time.time() - artst_more}")
+
 
     return top_3_artists
 
@@ -259,7 +278,6 @@ def get_top_tracks(username):
             tracks.append(track)
         except IndexError:
             print('index error')
-    print(f'time spent {time.time() - start}')
 
     return tracks
 
@@ -330,3 +348,4 @@ def get_user(username):
 #         artist_country = 'Unknown'
 #
 #     return artist_country
+
