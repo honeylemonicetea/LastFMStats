@@ -3,6 +3,8 @@ import environ
 import time
 from datetime import datetime
 from core.models import Artist
+import aiohttp
+import asyncio
 
 # todo: UNCOMMENT
 try:
@@ -29,10 +31,13 @@ headers = {
 def get_artists(username):
     artists = []
     start_req = time.time()  #TODO: remove
+    # async with aiohttp.ClientSession() as session:
+    #     async with session.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
+    #                                    'method': 'library.getartists', 'limit': '100'}) as r:
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
                                        'method': 'library.getartists', 'limit': '100'})
 
-    content = r.json()
+    content =  r.json()
     start_req = time.time()
     for i in range(100):
         try:
@@ -68,7 +73,7 @@ def get_artists(username):
                     raise Exception
 
             except Exception:
-                artist_image = get_artist_image(artist_name)  # gets the image from spotify
+                artist_image = asyncio.run(get_artist_image(artist_name))  # gets the image from spotify
                 country, flag = get_more_inf_ART(artist_name)
                 print(f'Time spent on getting one artist pic from spotify {time.time() - st}')
 

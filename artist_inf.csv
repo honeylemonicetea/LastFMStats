@@ -2340,3 +2340,82 @@ Kid Ink|https://i.scdn.co/image/ab6761610000e5eb15a85a7957cac2c370e713ab|https:/
 Scooter|https://i.scdn.co/image/ab6761610000e5eb1c4c2e0aeb040b12215dfc8a|https://flagcdn.com/w40/de.png|Germany
 Юрий Шатунов|https://i.scdn.co/image/ab6761610000e5eba14b47e177e2414ebefa3dc2|https://flagcdn.com/w40/ru.png|Russia
 Adelitas Way|https://i.scdn.co/image/ab6761610000e5eb987a25d0a1e4d7886fabe9f1|https://flagcdn.com/w40/us.png|United States
+Kamelot|<coroutine object get_artist_image at 0x00000212541A8F20>|https://flagcdn.com/w40/us.png|United States
+Nightwish|<coroutine object get_artist_image at 0x00000212541A8430>|https://flagcdn.com/w40/fi.png|Finland
+Epica|<coroutine object get_artist_image at 0x00000212541A9A10>|https://flagcdn.com/w40/nl.png|Netherlands
+Saves the Day|<coroutine object get_artist_image at 0x00000212541A8CF0>|https://flagcdn.com/w40/us.png|United States
+Jawbreaker|<coroutine object get_artist_image at 0x0000021253221C40>|https://flagcdn.com/w40/us.png|United States
+Lifetime|<coroutine object get_artist_image at 0x00000212541A9930>|https://flagcdn.com/w40/us.png|United States
+Xandria|<coroutine object get_artist_image at 0x00000212541A8580>|None|Bielefeld
+Blind Guardian|<coroutine object get_artist_image at 0x00000212541A94D0>|https://flagcdn.com/w40/de.png|Germany
+Therion|<coroutine object get_artist_image at 0x00000212541A9070>|https://flagcdn.com/w40/se.png|Sweden
+Visions of Atlantis|<coroutine object get_artist_image at 0x00000212541A89E0>|https://flagcdn.com/w40/at.png|Austria
+Mixtapes|<coroutine object get_artist_image at 0x00000212541A9000>|https://flagcdn.com/w40/us.png|United States
+Good Riddance|<coroutine object get_artist_image at 0x00000212541A8BA0>|https://flagcdn.com/w40/us.png|United States
+Screeching Weasel|<coroutine object get_artist_image at 0x00000212541A8EB0>|https://flagcdn.com/w40/us.png|United States
+The Ergs!|<coroutine object get_artist_image at 0x00000212541A9380>|https://flagcdn.com/w40/us.png|United States
+The Steinways|<coroutine object get_artist_image at 0x00000212541A9BD0>||Unknown
+The Gathering|<coroutine object get_artist_image at 0x00000212541A9D20>|https://flagcdn.com/w40/nl.png|Netherlands
+Kid Dynamite|<coroutine object get_artist_image at 0x0000021254043920>|https://flagcdn.com/w40/us.png|United States
+The Vandals|<coroutine object get_artist_image at 0x00000212541A91C0>|https://flagcdn.com/w40/us.png|United States
+All|<coroutine object get_artist_image at 0x00000212541A9CB0>|https://flagcdn.com/w40/us.png|United States
+Amberian Dawn|<coroutine object get_artist_image at 0x00000212541A9230>|https://flagcdn.com/w40/fi.png|Finland
+Amorphis|<coroutine object get_artist_image at 0x00000212541A8C10>|https://flagcdn.com/w40/fi.png|Finland
+Sonata Arctica|<coroutine object get_artist_image at 0x00000212541A98C0>|https://flagcdn.com/w40/fi.png|Finland
+Dark Tranquillity|<coroutine object get_artist_image at 0x00000212541A8900>|None|Gothenburg
+Dimmu Borgir|<coroutine object get_artist_image at 0x00000212541A9850>|https://flagcdn.com/w40/no.png|Norway
+Edenbridge|<coroutine object get_artist_image at 0x00000212541A9AF0>|https://flagcdn.com/w40/at.png|Austria
+Theatre of Tragedy|<coroutine object get_artist_image at 0x00000212541A8270>|https://flagcdn.com/w40/no.png|Norway
+Lemuria|<coroutine object get_artist_image at 0x00000212541A9B60>|https://flagcdn.com/w40/us.png|United States
+Immortal|<coroutine object get_artist_image at 0x00000212541AA570>|https://flagcdn.com/w40/no.png|Norway
+Paint It Black|<coroutine object get_artist_image at 0x00000212541A8190>|https://flagcdn.com/w40/us.png|United States
+Rancid|<coroutine object get_artist_image at 0x00000212542F27A0>|None|Berkeley
+The Muffs|<coroutine object get_artist_image at 0x00000212541A87B0>|https://flagcdn.com/w40/us.png|United States
+Sirenia|<coroutine object get_artist_image at 0x00000212542F2F10>|https://flagcdn.com/w40/no.png|Norway
+Tristania|<coroutine object get_artist_image at 0x00000212542F28F0>|https://flagcdn.com/w40/no.png|Norway
+Discount|<coroutine object get_artist_image at 0x00000212541A9310>|https://flagcdn.com/w40/us.png|United States
+The Lawrence Arms|<coroutine object get_artist_image at 0x00000212541AB0D0>|https://flagcdn.com/w40/us.png|United States
+No Use for a Name|<coroutine object get_artist_image at 0x00000212542F2810>|https://flagcdn.com/w40/us.png|United States
+After Forever|<coroutine object get_artist_image at 0x00000212541A8350>|https://flagcdn.com/w40/nl.png|Netherlands
+Insomnium|<coroutine object get_artist_image at 0x00000212542F3060>|https://flagcdn.com/w40/fi.png|Finland
+Lagwagon|<coroutine object get_artist_image at 0x00000212542F2570>|https://flagcdn.com/w40/us.png|United States
+House Boat|<coroutine object get_artist_image at 0x00000212542F26C0>||Unknown
+Joyce Manor|<coroutine object get_artist_image at 0x00000212542F2D50>|https://flagcdn.com/w40/us.png|United States
+Battle Beast|<coroutine object get_artist_image at 0x00000212542F2960>|https://flagcdn.com/w40/fi.png|Finland
+Dark Moor|<coroutine object get_artist_image at 0x00000212541A9700>|https://flagcdn.com/w40/es.png|Spain
+Propagandhi|<coroutine object get_artist_image at 0x00000212542F2500>|https://flagcdn.com/w40/ca.png|Canada
+Theocracy|<coroutine object get_artist_image at 0x00000212542F3220>|https://flagcdn.com/w40/us.png|United States
+Conception|<coroutine object get_artist_image at 0x00000212542F33E0>|https://flagcdn.com/w40/no.png|Norway
+Set Your Goals|<coroutine object get_artist_image at 0x00000212542F3140>|https://flagcdn.com/w40/us.png|United States
+Strung Out|<coroutine object get_artist_image at 0x00000212542F2FF0>|https://flagcdn.com/w40/us.png|United States
+Unleash the Archers|<coroutine object get_artist_image at 0x00000212542F3370>|https://flagcdn.com/w40/ca.png|Canada
+Teenage Bottlerocket|<coroutine object get_artist_image at 0x00000212542F2730>|https://flagcdn.com/w40/us.png|United States
+My Dying Bride|<coroutine object get_artist_image at 0x00000212542F2490>|https://flagcdn.com/w40/gb.png|United Kingdom
+Face to Face|<coroutine object get_artist_image at 0x00000212542F2AB0>|https://flagcdn.com/w40/us.png|United States
+Night Birds|<coroutine object get_artist_image at 0x00000212542F2C70>|https://flagcdn.com/w40/us.png|United States
+Dillinger Four|<coroutine object get_artist_image at 0x00000212542F2C00>|https://flagcdn.com/w40/us.png|United States
+The Copyrights|<coroutine object get_artist_image at 0x00000212542F31B0>|https://flagcdn.com/w40/us.png|United States
+A Wilhelm Scream|<coroutine object get_artist_image at 0x00000212542F3290>|https://flagcdn.com/w40/us.png|United States
+Myrath|<coroutine object get_artist_image at 0x00000212542F2A40>|https://flagcdn.com/w40/tn.png|Tunisia
+King Diamond|<coroutine object get_artist_image at 0x00000212542F3450>|https://flagcdn.com/w40/dk.png|Denmark
+The Mr. T Experience|<coroutine object get_artist_image at 0x00000212542F3990>|https://flagcdn.com/w40/us.png|United States
+Lipstick Homicide|<coroutine object get_artist_image at 0x00000212542F30D0>|None|Iowa City
+The Nerve Agents|<coroutine object get_artist_image at 0x00000212542F2B90>|https://flagcdn.com/w40/us.png|United States
+Powerwolf|<coroutine object get_artist_image at 0x00000212542F3300>|None|Saarbrücken
+Rhapsody|<coroutine object get_artist_image at 0x00000212542F3680>|https://flagcdn.com/w40/it.png|Italy
+Unto Others|<coroutine object get_artist_image at 0x00000212542F38B0>|None|Portland
+Less Than Jake|<coroutine object get_artist_image at 0x00000212542F3760>|https://flagcdn.com/w40/us.png|United States
+Forfun|https://i.scdn.co/image/ab6761610000e5ebfc1e4c61be7195f114f4c9b2||Unknown
+BRAZA|https://i.scdn.co/image/ab6761610000e5eb5e14cf02bd832f37d4495e04|https://flagcdn.com/w40/br.png|Brazil
+He Is Legend|https://i.scdn.co/image/ab6761610000e5ebc7ad2953e452b58132371a28|https://flagcdn.com/w40/us.png|United States
+Darkest Hour|https://i.scdn.co/image/ab6761610000e5eb80aaf4642a78f1165401bea2|https://flagcdn.com/w40/us.png|United States
+Before Their Eyes|https://i.scdn.co/image/ab6761610000e5eba35e873c2d1583a89d59ef4f|https://flagcdn.com/w40/us.png|United States
+CPM 22|https://i.scdn.co/image/ab6761610000e5ebf9a2f6d4c28847811ff1ca12|https://flagcdn.com/w40/br.png|Brazil
+The Plot in You|https://i.scdn.co/image/ab6761610000e5ebdba167d50f3a30b45150ca29|https://flagcdn.com/w40/us.png|United States
+Funeral for a Friend|https://i.scdn.co/image/ab6761610000e5ebc9f569af718cea44a33de372|https://flagcdn.com/w40/gb.png|United Kingdom
+Northlane|https://i.scdn.co/image/ab6761610000e5eb2010ab96fca0e8bd7928c969|https://flagcdn.com/w40/au.png|Australia
+Emery|https://i.scdn.co/image/ab6761610000e5eb0465ae727a66caa6e6b98e32|https://flagcdn.com/w40/us.png|United States
+Ocean Grove|https://i.scdn.co/image/ab6761610000e5eb06fb08b6e594b116bf50b164|None|Melbourne
+Protest the Hero|https://i.scdn.co/image/ab6761610000e5eb8df5e7ad475aeaaa865a54fe|https://flagcdn.com/w40/ca.png|Canada
+This Is Menace|https://i.scdn.co/image/ab67616d0000b2732448f456093e6154a8fe49c7|https://flagcdn.com/w40/gb.png|United Kingdom
+Stereophonics|https://i.scdn.co/image/ab6761610000e5eb9eeb3f2569bb34874643bb72|https://flagcdn.com/w40/gb.png|United Kingdom

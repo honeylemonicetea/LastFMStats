@@ -1,4 +1,7 @@
 import base64
+
+import aiohttp
+import asyncio
 import requests
 import environ
 
@@ -17,25 +20,29 @@ auth_header = {
     'Content-Type': 'application/x-www-form-urlencoded'
 }
 
+
 def client_cred():
-    resp = requests.post(TOKEN_ENDPOINT, params={'grant_type': 'client_credentials', 'client_id':env('CLIENT_ID'),
+    resp = requests.post(TOKEN_ENDPOINT, params={'grant_type': 'client_credentials', 'client_id': env('CLIENT_ID'),
                                                  'client_secret': env('CLIENT_SECRET')}, headers=auth_header)
     response = resp.json()
     token = response['access_token']
     return token
 
 
-def get_artist_image(name):  # SPOTIFY
+async def get_artist_image(name):  # SPOTIFY
     token = client_cred()
     headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {token}'
     }
+    params = {'q': name, 'type': 'artist'}
 
-    get_art = requests.get(WEB_API_SPOT, params={'q': name, 'type': 'artist'}, headers=headers)
-    artist_info = get_art.json()
-    return artist_info['artists']['items'][0]['images'][0]['url']
+    async with aiohttp.ClientSession() as session:
+        async with session.get(WEB_API_SPOT, params=params, headers=headers) as get_art:
+            # get_art = requests.get(WEB_API_SPOT, params=params, headers=headers)
+            artist_info = await get_art.json()
+            return artist_info['artists']['items'][0]['images'][0]['url']
 
 
 def get_track_info(track_name, artist):

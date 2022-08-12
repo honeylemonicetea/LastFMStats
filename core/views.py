@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .tools.lastfm import  get_artists, get_albums, get_top3_ART, get_top_tracks, get_user
 from .forms import LFMUser
 from .models import LastfmUser
+import asyncio
 
 
 def home(request):
