@@ -1,4 +1,5 @@
 import base64
+import time
 
 import aiohttp
 import asyncio
@@ -29,7 +30,8 @@ def client_cred():
     return token
 
 
-async def get_artist_image(name):  # SPOTIFY
+def get_artist_image(name):  # SPOTIFY
+    start = time.time()
     token = client_cred()
     headers = {
         'Accept': 'application/json',
@@ -37,12 +39,13 @@ async def get_artist_image(name):  # SPOTIFY
         'Authorization': f'Bearer {token}'
     }
     params = {'q': name, 'type': 'artist'}
-
-    async with aiohttp.ClientSession() as session:
-        async with session.get(WEB_API_SPOT, params=params, headers=headers) as get_art:
-            # get_art = requests.get(WEB_API_SPOT, params=params, headers=headers)
-            artist_info = await get_art.json()
-            return artist_info['artists']['items'][0]['images'][0]['url']
+    #
+    # async with aiohttp.ClientSession() as session:
+    #     async with session.get(WEB_API_SPOT, params=params, headers=headers) as get_art:
+    get_art = requests.get(WEB_API_SPOT, params=params, headers=headers)
+    artist_info =  get_art.json()
+    print(f'{time.time()-start}')
+    return artist_info['artists']['items'][0]['images'][0]['url']
 
 
 def get_track_info(track_name, artist):

@@ -29,17 +29,18 @@ headers = {
     ARTISTS 
 """
 def get_artists(username):
+    start = time.time()
     artists = []
     start_req = time.time()  #TODO: remove
     # async with aiohttp.ClientSession() as session:
     #     async with session.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
     #                                    'method': 'library.getartists', 'limit': '100'}) as r:
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
-                                       'method': 'library.getartists', 'limit': '100'})
+                                       'method': 'library.getartists', 'limit': '50'})
 
     content =  r.json()
     start_req = time.time()
-    for i in range(100):
+    for i in range(50):
         try:
             artist_info = dict()
             artist_name = content['artists']['artist'][i]['name']
@@ -56,7 +57,7 @@ def get_artists(username):
                 # artist_image = artist_db.photo_url
                 # flag = artist_db.country_flag_url
                 artist_image = ''
-                flag = ''
+                # flag = ''
                 found = False
                 with open('artist_inf.csv', "r", encoding='utf-8') as file:
                     info = file.readlines()
@@ -65,23 +66,25 @@ def get_artists(username):
                     line_split = line.split('|')
                     if line_split[0] == artist_name:
                         artist_image = line_split[1]
-                        flag = line_split[2]
+                        # flag = line_split[2]
                         found = True
+                        print('EXISTS!!')
                         break
 
                 if found == False:
                     raise Exception
 
             except Exception:
-                artist_image = asyncio.run(get_artist_image(artist_name))  # gets the image from spotify
-                country, flag = get_more_inf_ART(artist_name)
-                print(f'Time spent on getting one artist pic from spotify {time.time() - st}')
+                artist_image = get_artist_image(artist_name)  # gets the image from spotify
+                # country = get_more_inf_ART(artist_name)
+                # flag = ''
 
                 # new_artist = Artist.objects.create(name=artist_name, photo_url=artist_image, last_fm_link=artist_url,
                 #                                    country = country, country_flag_url = flag)
                 # new_artist.save()
                 with open('artist_inf.csv', 'a', encoding='utf-8') as file:
-                    file.write(f'{artist_name}|{artist_image}|{flag}|{country}\n')
+                    # file.write(f'{artist_name}|{artist_image}|{flag}|{country}\n')
+                    file.write(f'{artist_name}|{artist_image}\n')
 
 
             artist_info['id'] = i + 1
@@ -89,10 +92,11 @@ def get_artists(username):
             artist_info['playcount'] = artist_playcount
             artist_info['artist_url'] = artist_url
             artist_info['artist_image'] = artist_image
-            artist_info['flag'] = flag
+            # artist_info['flag'] = flag
             artists.append(artist_info)
         except IndexError:
             print('index error')
+    print(f"Artist fetch time: {time.time()-start}")
     return artists
 
 def get_top3_ART(username='BellaLeto'):
@@ -157,6 +161,7 @@ def get_top3_ART(username='BellaLeto'):
     return top_3_artists
 
 def get_more_inf_ART(artist_name):
+    start_time = time.time()
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'artist': artist_name, 'format': 'json',
                                        'method': 'artist.getInfo', 'autocorrect': '1'})
     info = r.json()
@@ -165,7 +170,7 @@ def get_more_inf_ART(artist_name):
     # playcount = int(info['artist']['stats']['playcount'])
     # ratio = playcount // listeners
 
-    time.sleep(0.1)  # 50 reqs per second limit
+    # time.sleep(0.1)  # 50 reqs per second limit
     r = requests.get(f"{MB_ROOT}artist?", headers=headers, params={'query': artist_name, 'fmt': 'json'})
     json_data = r.json()['artists'][0]
     artist_id = json_data['id']
@@ -173,18 +178,19 @@ def get_more_inf_ART(artist_name):
         artist_country = json_data['area']['name']
     except Exception:
         artist_country = 'Unknown'
-    if artist_country != 'Unknown':
-        country_names = requests.get('https://flagcdn.com/en/codes.json')
-        country_names = country_names.json()
-        flag_url = 'None'
-        for code, country in country_names.items():
-            if country == artist_country:
-                flag_url = f'https://flagcdn.com/w40/{code}.png'
-                break
-    else:
-        flag_url = ''
-
-    return artist_country, flag_url
+        print('FLAG ERROR!')
+    # if artist_country != 'Unknown':
+    #     country_names = requests.get('https://flagcdn.com/en/codes.json')
+    #     country_names = country_names.json()
+    #     flag_url = 'None'
+    #     for code, country in country_names.items():
+    #         if country == artist_country:
+    #             flag_url = f'https://flagcdn.com/w40/{code}.png'
+    #             break
+    # else:
+    #     flag_url = ''
+    print(f"COUNTRY FETCH: {time.time()-start_time}")
+    return artist_country
 
 
 def get_albums(username):

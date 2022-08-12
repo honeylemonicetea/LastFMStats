@@ -17,26 +17,27 @@ ARTISTS
             </form>
         </div>
         {% if artists %}
-            <div class="top-three">
-                <h1>Here's Your Top 3</h1>
-                <div class="chart-container">
-                    {% for artist in  top_three%}
-                        <div class="track-container">
-                            <div class="track-num">
-                                {{forloop.counter}}
-                            </div>
-                            <div class="track-cover artist-cover"
-                                 style="background-image:url({{artist.artist_image}})"></div>
-                            <div class="track-info">
-                                <p class="track-name"> {{artist.artist_name}} </p>
-                                <p class="track-artist"><b>Your Scrobbles: </b>{{artist.playcount}}</p>
-                                 <p class="track-artist"><b>Country: </b>{{artist.country}}</p>
-                            </div>
+            {% if top_three %}
+                <div class="top-three">
+                    <h1>Here's Your Top 3</h1>
+                    <div class="chart-container">
+                        {% for artist in  top_three%}
+                            <div class="track-container">
+                                <div class="track-num">
+                                    {{forloop.counter}}
+                                </div>
+                                <div class="track-cover artist-cover"
+                                     style="background-image:url({{artist.artist_image}})"></div>
+                                <div class="track-info">
+                                    <p class="track-name"> {{artist.artist_name}} </p>
+                                    <p class="track-artist"><b>Your Scrobbles: </b>{{artist.playcount}}</p>
+                                     <p class="track-artist"><b>Country: </b>{{artist.country}}</p>
+                                </div>
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
-
+            {% endif %}
             <div class="greeting">
                    <h1>{{greeting}}</h1>
             </div>

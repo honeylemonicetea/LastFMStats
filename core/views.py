@@ -29,12 +29,12 @@ def view_artists(request):
         return render(request, 'artists.html')
     elif request.method == 'POST':
         username = request.POST['username']
-        artists = get_artists(username)
-        top_three = get_top3_ART(username)
+        artists =   get_artists(username)
+        # top_three =  get_top3_ART(username)
         # info about the number one artist
-        greeting = f'Hi, {username}, here is your Top 100 artists grid'
+        greeting = f'Hi, {username}, here is your Top 50 artists grid'
 
-        return render(request, 'artists.html', {'artists':artists, 'greeting':greeting,  'top_three':top_three})
+        return  render(request, 'artists.html', {'artists':artists, 'greeting':greeting})
 
 def view_albums(request):
     if request.method == 'GET':
