@@ -106,9 +106,26 @@ def get_top3_ART(username='BellaLeto'):
             # artist_image, code = get_image(artist_name)
             # if code != 200:
 
-            artist_db = Artist.objects.get(name=artist_name)
-            artist_image = artist_db.photo_url
-            artist_country = artist_db.country
+            # artist_db = Artist.objects.get(name=artist_name)
+            # artist_image = artist_db.photo_url
+            artist_country = ''
+            artist_image = ''
+            flag = ''
+            found = False
+            with open('artist_inf.csv', "r", encoding='utf-8') as file:
+                info = file.readlines()
+
+            for line in info:
+                line_split = line.split('|')
+                if line_split[0] == artist_name:
+                    artist_image = line_split[1]
+                    artist_country = line_split[3]
+
+                    found = True
+                    break
+
+            if found == False:
+                raise Exception
 
 
         except Exception:
