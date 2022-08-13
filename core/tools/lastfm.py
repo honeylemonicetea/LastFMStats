@@ -277,13 +277,13 @@ def album_more_info(album_name, artist_name):
 
 
 
-def get_top_tracks(username):
+def get_top_tracks(username, quantity=10, period='overall'):
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
-                                       'method': 'user.getTopTracks', 'period': 'overall', 'limit': '100'})
+                                       'method': 'user.getTopTracks', 'period': period, 'limit': quantity})
     content = r.json()['toptracks']['track']
     tracks = []
     start = time.time()
-    for i in range(100):
+    for i in range(quantity):
         try:
             track = dict()
             your_playcount = content[i]['playcount']

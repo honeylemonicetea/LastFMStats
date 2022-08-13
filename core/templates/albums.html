@@ -10,12 +10,13 @@ ALBUMS
             <h1>enter your last.fm username</h1>
             <form action="" method="post">
                 {% csrf_token %}
-                <p><input type="search" placeholder="Last.fm username" name="username">
-                <select name="grid" id="grid">
-                    <option value="3">3x3</option>
-                    <option value="4">4x4</option>
-                    <option value="5">5x5</option>
-                </select>
+                <p>
+                    <input type="search" placeholder="Last.fm username" name="username">
+                    <select name="grid" id="grid">
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                    </select>
                 <select name="period" id="period">
                     <option value="7day">7 days</option>
                     <option value="1month">1 month</option>

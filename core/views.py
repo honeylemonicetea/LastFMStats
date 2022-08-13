@@ -63,9 +63,11 @@ def view_tracks(request):
         return render(request, 'tracks.html')
     elif request.method == 'POST':
         username = request.POST['username']
-        greeting = f'Hi, {username}, here is your Top 100 tracks chart'
-        track_list = get_top_tracks(username)
-        return render(request, 'tracks.html', {'tracks': track_list, 'greeting': greeting})
+        quantity = int(request.POST['quantity'])
+        period = request.POST['period']
+        greeting = f'Hi, {username}, here is your Top {quantity} tracks chart'
+        track_list = get_top_tracks(username, quantity, period)
+        return render(request, 'tracks.html', {'tracks': track_list, 'greeting': greeting, 'quantity':quantity})
 
 
 
