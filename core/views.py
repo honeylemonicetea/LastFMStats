@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .tools.lastfm import  get_artists, get_albums, get_top3_ART, get_top_tracks, get_user
+from .tools.lastfm import  get_artists, get_albums, get_top_tracks, get_user
 from .forms import LFMUser
 from .models import LastfmUser
 import asyncio
@@ -12,7 +12,6 @@ def home(request):
         print(token)
 
     return render(request, 'home.html')
-
 
 def testing_forms(request):
     if request.method == 'POST':
@@ -28,25 +27,35 @@ def view_artists(request):
     if request.method == 'GET':
         return render(request, 'artists.html')
     elif request.method == 'POST':
+        print(request.POST)
         username = request.POST['username']
-        artists =   get_artists(username)
-        # top_three =  get_top3_ART(username)
-        # info about the number one artist
-        greeting = f'Hi, {username}, here is your Top 50 artists grid'
+        grid_size = int(request.POST['grid'])
+        period = request.POST['period']
+        try:
+            overlay = request.POST['overlay']
+        except Exception:
+            overlay = 'off'
+        artists =   get_artists(username, grid_size, period)
+        greeting = f'Hi, {username}, here is your Top {grid_size**2} artists grid'
 
-        return  render(request, 'artists.html', {'artists':artists, 'greeting':greeting})
+        return  render(request, 'artists.html', {'artists':artists, 'greeting':greeting, 'overlay':overlay,
+                                                 'size': grid_size})
 
 def view_albums(request):
     if request.method == 'GET':
         return render(request, 'albums.html')
     elif request.method == 'POST':
         username = request.POST['username']
-        albums = get_albums(username)
-        greeting = f'Hi, {username}, here is your Top 100 albums grid'
+        grid_size = int(request.POST['grid'])
+        period = request.POST['period']
+        try:
+            overlay = request.POST['overlay']
+        except Exception:
+            overlay = 'off'
+        albums = get_albums(username, grid_size, period)
+        greeting = f'Hi, {username}, here is your Top {grid_size**2} albums grid'
         # two_albs, top_one = top_three_albums(username)
-
-
-        return render(request, 'albums.html', {'albums': albums, 'greeting': greeting })
+        return render(request, 'albums.html', {'albums': albums, 'greeting': greeting, 'overlay':overlay, 'size': grid_size })
 
 
 def view_tracks(request):
@@ -56,8 +65,6 @@ def view_tracks(request):
         username = request.POST['username']
         greeting = f'Hi, {username}, here is your Top 100 tracks chart'
         track_list = get_top_tracks(username)
-
-
         return render(request, 'tracks.html', {'tracks': track_list, 'greeting': greeting})
 
 

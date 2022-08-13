@@ -46,7 +46,7 @@
 
 }
 
-.form-container input{
+.form-container input, select{
     padding: 15px;
     border-radius: 5px;
     margin: 2% 0.5%;
@@ -73,7 +73,7 @@
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 3%;
-
+    font-size: 1.2em;
 }
 
 hr{
@@ -122,15 +122,34 @@ hr{
     margin: 50px auto;
 
 }
+
+.grid3{
+    grid-template-columns: repeat(3, 1fr);
+    width: 700px
+}
+.grid4{
+    grid-template-columns: repeat(4, 1fr);
+}
+.grid5{
+    grid-template-columns: repeat(5, 1fr);
+    width: 1200px
+}
+
+
 .artist-info, .album-info{
     background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.8));
     position: absolute;
-    bottom: -110px;  /* */
+    bottom: -140px;  /* */
     color: white;
     width: 100%;
     padding: 5%;
     transition: 0.5s;
 }
+
+.on.artist-info, .on.album-info{
+    bottom: 0;
+}
+
 .artist-card:hover .artist-info, .album-card:hover .album-info{
     bottom: 0
 }
@@ -144,7 +163,7 @@ hr{
 /* TRACKS CHART */
 
 .chart-container{
-    width: 70%;
+    width: 60%;
     margin: auto;
     margin-bottom: 10%;
 }
@@ -154,6 +173,7 @@ hr{
     background-color: #f1f1f1;
     display: flex;
     color: black;
+
 }
 
 .track-num{

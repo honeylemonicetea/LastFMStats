@@ -10,19 +10,36 @@ ALBUMS
             <h1>enter your last.fm username</h1>
             <form action="" method="post">
                 {% csrf_token %}
-                <p><input type="search" placeholder="Last.fm username" name="username"> <input type="submit" value="submit" ></p>
+                <p><input type="search" placeholder="Last.fm username" name="username">
+                <select name="grid" id="grid">
+                    <option value="3">3x3</option>
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+                </select>
+                <select name="period" id="period">
+                    <option value="7day">7 days</option>
+                    <option value="1month">1 month</option>
+                    <option value="3month">3 months</option>
+                    <option value="6month">6 months</option>
+                    <option value="12month">12 months</option>
+                    <option value="overall">Overall</option>
+                </select>
+                    <input type="submit" value="submit" ></p>
+                 <input type="checkbox" name="overlay" id="overlay">
+                <label for="overlay">Show the album card overlay (if unchecked the overlay will be only shown
+                    on hover)</label>
             </form>
         </div>
 
         <div class="greeting">
-               {{greeting}}
+            <h1>{{greeting}}</h1>
         </div>
 
-        <div class="albums-container">
+        <div class="albums-container grid{{size}}">
             {% for item in albums %}
             <div class="album-card" style="background-image:url({{item.album_image}})">
-                <div class="album-info">
-                    <a href={{item.album_url}}>{{item.album_name}}</a>
+                <div class="album-info {{overlay}}">
+                    <a href={{item.album_url}}>{{forloop.counter}}. {{item.album_name}}</a>
                     <p>{{item.artist}}</p>
                     <p>Playcount: {{item.playcount}}</p>
                     <p></p>

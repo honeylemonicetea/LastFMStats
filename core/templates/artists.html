@@ -11,9 +11,23 @@ ARTISTS
             <form action="" method="post" autocomplete="off">
                 {% csrf_token %}
                 <p><input type="search" placeholder="Last.fm username" name="username" autocomplete="new_password">
+                    <select name="grid" id="grid">
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                    </select>
+                    <select name="period" id="period">
+                        <option value="7day">7 days</option>
+                        <option value="1month">1 month</option>
+                        <option value="3month">3 months</option>
+                        <option value="6month">6 months</option>
+                        <option value="12month">12 months</option>
+                        <option value="overall">Overall</option>
+                    </select>
                     <input type="submit" value="submit" ></p>
                  <input type="checkbox" name="overlay" id="overlay">
-                <label for="overlay">Hide the artist card overlay</label>
+                <label for="overlay">Show the artist card overlay (if unchecked the overlay will be only shown
+                    on hover)</label>
             </form>
         </div>
         {% if artists %}
@@ -41,11 +55,11 @@ ARTISTS
             <div class="greeting">
                    <h1>{{greeting}}</h1>
             </div>
-            <div class="artists-container">
+            <div class="artists-container grid{{size}}">
 
                 {% for item in artists %}
                 <div class="artist-card" style="background-image:url({{item.artist_image}})">
-                    <div class="artist-info">
+                    <div class="artist-info {{overlay}}">
                         <a href={{item.artist_url}}>    {{forloop.counter}}. {{item.artist_name}}
                             {% if item.flag != 'None' %}
                                 <img class="flag-smaller" src="{{item.flag}}">
