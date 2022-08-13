@@ -1,1 +1,1 @@
-web: gunicorn lastfmkitty.asgi --log-file -
+web: gunicorn lastfmkitty.wsgi --log-file -
