@@ -246,3 +246,7 @@ hr{
     user-select: none
 
  }
+
+ .user-info a{
+    color: white;
+ }

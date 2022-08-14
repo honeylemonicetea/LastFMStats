@@ -31,74 +31,52 @@ headers = {
 def get_artists(username, size=3, period='overall'):
     start = time.time()
     artists = []
-    start_req = time.time()  #TODO: remove
-    # async with aiohttp.ClientSession() as session:
-    #     async with session.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
-    #                                    'method': 'library.getartists', 'limit': '100'}) as r:
-    limit = 1
     print(period)
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
                                        'method': 'user.getTopArtists', 'limit': size**2, 'period':period})
-
-    content =  r.json()
-    start_req = time.time()
-    for i in range(50):
-        try:
-            artist_info = dict()
-            artist_name = content['topartists']['artist'][i]['name']
-            artist_playcount = content['topartists']['artist'][i]['playcount']
-            artist_url = content['topartists']['artist'][i]['url']
-
-            # TODO: ENABLE IN DEV, GIVES TIMEOUT ERROR ON PROD
-            # flag_url = get_country_flag(artist_country)
-
-            # if the artists is in the db, get the info from there
+    try:
+        content =  r.json()['topartists']
+        for i in range(size**2):
             try:
-                st = time.time()
-                # artist_db = Artist.objects.get(name=artist_name)
-                # artist_image = artist_db.photo_url
-                # flag = artist_db.country_flag_url
-                artist_image = ''
-                flag = ''
-                found = False
-                with open('artist_inf.csv', "r", encoding='utf-8') as file:
-                    info = file.readlines()
-
-                for line in info:
-                    line_split = line.split('|')
-                    if line_split[0] == artist_name:
-                        artist_image = line_split[1]
-                        flag = line_split[2]
-                        found = True
-                        break
-
-                if found == False:
-                    raise Exception
-
-            except Exception:
-                artist_image = get_artist_image(artist_name)  # gets the image from spotify
-                country, flag = get_more_inf_ART(artist_name)
-                # flag = ''
-
-                # new_artist = Artist.objects.create(name=artist_name, photo_url=artist_image, last_fm_link=artist_url,
-                #                                    country = country, country_flag_url = flag)
-                # new_artist.save()
-                with open('artist_inf.csv', 'a', encoding='utf-8') as file:
-                    file.write(f'{artist_name}|{artist_image}|{flag}|{country}\n')
-                    # file.write(f'{artist_name}|{artist_image}\n')
-
-
-            artist_info['id'] = i + 1
-            artist_info['artist_name'] = artist_name
-            artist_info['playcount'] = artist_playcount
-            artist_info['artist_url'] = artist_url
-            artist_info['artist_image'] = artist_image
-            artist_info['flag'] = flag
-            artists.append(artist_info)
-        except IndexError:
-            print('index error')
-    print(f"Artist fetch time: {time.time()-start}")
-    return artists
+                artist_info = dict()
+                artist_name = content['artist'][i]['name']
+                artist_playcount = content['artist'][i]['playcount']
+                artist_url = content['artist'][i]['url']
+                # if the artists is in the db, get the info from there
+                try:
+                    st = time.time()
+                    artist_image = ''
+                    flag = ''
+                    found = False
+                    with open('artist_inf.csv', "r", encoding='utf-8') as file:
+                        info = file.readlines()
+                    for line in info:
+                        line_split = line.split('|')
+                        if line_split[0] == artist_name:
+                            artist_image = line_split[1]
+                            flag = line_split[2]
+                            found = True
+                            break
+                    if found == False:
+                        raise Exception
+                except Exception:
+                    artist_image = get_artist_image(artist_name)  # gets the image from spotify
+                    country, flag = get_more_inf_ART(artist_name)
+                    with open('artist_inf.csv', 'a', encoding='utf-8') as file:
+                        file.write(f'{artist_name}|{artist_image}|{flag}|{country}\n')
+                artist_info['id'] = i + 1
+                artist_info['artist_name'] = artist_name
+                artist_info['playcount'] = artist_playcount
+                artist_info['artist_url'] = artist_url
+                artist_info['artist_image'] = artist_image
+                artist_info['flag'] = flag
+                artists.append(artist_info)
+            except IndexError:
+                print('index error')
+        print(f"Artist fetch time: {time.time()-start}")
+        return artists
+    except Exception:
+        return None
 
 """
     OBSOLETE
@@ -168,16 +146,8 @@ def get_more_inf_ART(artist_name):
     start_time = time.time()
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'artist': artist_name, 'format': 'json',
                                        'method': 'artist.getInfo', 'autocorrect': '1'})
-    info = r.json()
-
-    # listeners = int(info['artist']['stats']['listeners'])
-    # playcount = int(info['artist']['stats']['playcount'])
-    # ratio = playcount // listeners
-
-    # time.sleep(0.1)  # 50 reqs per second limit
     r = requests.get(f"{MB_ROOT}artist?", headers=headers, params={'query': artist_name, 'fmt': 'json'})
     json_data = r.json()['artists'][0]
-    artist_id = json_data['id']
     try:
         artist_country = json_data['area']['name']
     except Exception:
@@ -199,24 +169,26 @@ def get_more_inf_ART(artist_name):
 
 def get_albums(username, size=3, period='overall'):
     albums = []
-    r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
-                                       'method': 'user.gettopalbums', 'period': period, 'limit': size**2})
-    content = r.json()
-    for i in range(size**2):
-        album_info = dict()
-        album_title = content['topalbums']['album'][i]['name']
-        album_playcount = content['topalbums']['album'][i]['playcount']
-        album_url = content['topalbums']['album'][i]['url']
-        album_image = content['topalbums']['album'][i]['image'][3]['#text']
-        artist_name = content['topalbums']['album'][i]['artist']['name']
-        album_info['id'] = i + 1
-        album_info['album_name'] = album_title
-        album_info['playcount'] = album_playcount
-        album_info['album_url'] = album_url
-        album_info['album_image'] = album_image
-        album_info['artist'] = artist_name
-        albums.append(album_info)
-    return albums
+    r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json','method': 'user.gettopalbums', 'period': period, 'limit': size**2})
+    try:
+        content = r.json()['topalbums']
+        for i in range(size**2):
+            album_info = dict()
+            album_title = content['album'][i]['name']
+            album_playcount = content['album'][i]['playcount']
+            album_url = content['album'][i]['url']
+            album_image = content['album'][i]['image'][3]['#text']
+            artist_name = content['album'][i]['artist']['name']
+            album_info['id'] = i + 1
+            album_info['album_name'] = album_title
+            album_info['playcount'] = album_playcount
+            album_info['album_url'] = album_url
+            album_info['album_image'] = album_image
+            album_info['artist'] = artist_name
+            albums.append(album_info)
+        return albums
+    except Exception:
+        return None
 
 
 def album_more_info(album_name, artist_name):
@@ -280,71 +252,74 @@ def album_more_info(album_name, artist_name):
 def get_top_tracks(username, quantity=10, period='overall'):
     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
                                        'method': 'user.getTopTracks', 'period': period, 'limit': quantity})
-    content = r.json()['toptracks']['track']
-    tracks = []
-    start = time.time()
-    for i in range(quantity):
-        try:
-            track = dict()
-            your_playcount = content[i]['playcount']
-            track_name = content[i]['name']
-            artist_name = content[i]['artist']['name']
+    try:
+        content = r.json()['toptracks']['track']
+        tracks = []
+        start = time.time()
+        for i in range(quantity):
             try:
-                # album_name, album_cover = get_track_info(track_name, artist_name)   #gets the info from spotify
+                track = dict()
+                your_playcount = content[i]['playcount']
+                track_name = content[i]['name']
+                artist_name = content[i]['artist']['name']
+                try:
+                    # album_name, album_cover = get_track_info(track_name, artist_name)   #gets the info from spotify
 
-                req = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'track': track_name, 'artist': artist_name,
-                                   'format': 'json', 'method':'track.getInfo', 'period':'overall', 'limit': '1'})
-                req_content = req.json()['track']
-                album_name = req_content['album']['title']
-                album_cover = req_content['album']['image'][3]['#text']
+                    req = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'track': track_name, 'artist': artist_name,
+                                       'format': 'json', 'method':'track.getInfo', 'period':'overall', 'limit': '1'})
+                    req_content = req.json()['track']
+                    album_name = req_content['album']['title']
+                    album_cover = req_content['album']['image'][3]['#text']
 
-            except Exception:
-                album_name = 'Unknown'
-                album_cover = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
-            track['num'] = i + 1
-            track['name'] = track_name
-            track['playcount'] = your_playcount
-            track['artist'] = artist_name
-            track['album_name'] = album_name
-            track['album_cover'] = album_cover
-            tracks.append(track)
-        except IndexError:
-            print('index error')
+                except Exception:
+                    album_name = 'Unknown'
+                    album_cover = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
+                track['num'] = i + 1
+                track['name'] = track_name
+                track['playcount'] = your_playcount
+                track['artist'] = artist_name
+                track['album_name'] = album_name
+                track['album_cover'] = album_cover
+                tracks.append(track)
+            except IndexError:
+                print('index error')
 
-    return tracks
+        return tracks
+    except Exception:
+        return None
 
 
 
 def get_user(username):
     r = requests.post(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
                                         'method': 'user.getInfo'})
-    user_data = r.json()['user']
-    user_country = user_data['country']
-    # country_flag = get_country_flag(user_country)
-    user_age = user_data['age']
-    user_playcount = user_data['playcount']
-    user_name = user_data['realname']
-    user_image = user_data['image'][3]['#text']
-    registered = float(user_data['registered']['unixtime'])
+    try:
+        user_data = r.json()['user']
+        user_age = user_data['age']
+        user_playcount = user_data['playcount']
+        user_name = user_data['realname']
+        user_image = user_data['image'][3]['#text']
+        registered = float(user_data['registered']['unixtime'])
 
-    string_date = datetime.utcfromtimestamp(registered).strftime('%m/%d/%Y')
+        string_date = datetime.utcfromtimestamp(registered).strftime('%m/%d/%Y')
 
-    user_url = user_data['url']
-    user_gender = user_data['gender']
-    user_type = user_data['type']
-    user_dict = {
-        'username': username,
-        'country': user_country,
-        'age': user_age,
-        'playcount': user_playcount,
-        'realName': user_name,
-        'image': user_image,
-        'registered': string_date,
-        'user_url': user_url,
-        'user_gender': user_gender,
-        'user_type': user_type
-    }
-    return user_dict
+        user_url = user_data['url']
+        user_gender = user_data['gender']
+        user_type = user_data['type']
+        user_dict = {
+            'username': username,
+            'age': user_age,
+            'playcount': user_playcount,
+            'realName': user_name,
+            'image': user_image,
+            'registered': string_date,
+            'user_url': user_url,
+            'user_gender': user_gender,
+            'user_type': user_type
+        }
+        return user_dict
+    except Exception:
+        return None
 
 
 # musicbrainz     fmt=json
