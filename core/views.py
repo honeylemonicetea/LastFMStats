@@ -108,7 +108,7 @@ def view_profile(request):
             message = ''
         else:
             message = "Couldn't find the user"
-        return render(request, 'profile.html', {'user_info':user_info, "message": message})
+        return render(request, 'profile.html', {'user_info':user_info, "message": message, "username":username})
 
 
 def under_construction(request):
