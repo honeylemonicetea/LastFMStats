@@ -11,13 +11,17 @@ ALBUMS
             <form action="" method="post">
                 {% csrf_token %}
                 <p>
-                    <input type="search" placeholder="Last.fm username" name="username">
+                    <input type="search" placeholder="Last.fm username" name="username" value="{{username}}">
                     <select name="grid" id="grid">
+                         <option value="{{size}}">{{size_verbose}}</option>
+                        <option disabled>---------</option>
                         <option value="3">3x3</option>
                         <option value="4">4x4</option>
                         <option value="5">5x5</option>
                     </select>
                 <select name="period" id="period">
+                    <option value="{{period}}">{{period_verbose}}</option>
+                    <option disabled>---------</option>
                     <option value="7day">7 days</option>
                     <option value="1month">1 month</option>
                     <option value="3month">3 months</option>

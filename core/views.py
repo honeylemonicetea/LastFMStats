@@ -64,6 +64,7 @@ def view_albums(request):
         grid_size = int(request.POST['grid'])
         period = request.POST['period']
         period_verbose = PERIOD_DICT.get(period)
+        size_verbose = f'{grid_size}x{grid_size}'
         try:
             overlay = request.POST['overlay']
         except Exception:
@@ -73,7 +74,10 @@ def view_albums(request):
             greeting = f'Hi, {username}, here is your Top {grid_size**2} albums grid'
         else:
             greeting = "Couldn't find the user"
-        return render(request, 'albums.html', {'albums': albums, 'greeting': greeting, 'overlay':overlay, 'size': grid_size })
+        return render(request, 'albums.html', {'albums': albums, "username":username, 'greeting': greeting,
+                                               'overlay':overlay,
+                                               'size': grid_size, "period_verbose":period_verbose, "size_verbose":
+                                                   size_verbose})
 
 
 def view_tracks(request):
