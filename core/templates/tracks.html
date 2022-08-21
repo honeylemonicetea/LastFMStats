@@ -10,15 +10,20 @@ TRACKS
             <h1>enter your last.fm username</h1>
             <form action="" method="post" autocomplete="off">
                 {% csrf_token %}
-                <p><input type="search" placeholder="Last.fm username" name="username" autocomplete="new_password">
+                <p><input type="search" placeholder="Last.fm username" name="username" autocomplete="new_password"
+                          value="{{username}}">
                     <select name="quantity" id="quantity">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
+                        <option value="{{quantity}}" >{{quantity}}</option>
+                        <option disabled>---------</option>
+                        <option value="10" >10</option>
+                        <option value="25" >25</option>
+                        <option value="50" >50</option>
                         <option value="75">75</option>
                         <option value="100">100</option>
                     </select>
                     <select name="period" id="period">
+                        <option value="{{period}}">{{period_verbose}}</option>
+                        <option disabled>---------</option>
                         <option value="7day">7 days</option>
                         <option value="1month">1 month</option>
                         <option value="3month">3 months</option>

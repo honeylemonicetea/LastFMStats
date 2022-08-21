@@ -3,7 +3,14 @@ from .tools.lastfm import  get_artists, get_albums, get_top_tracks, get_user
 from .forms import LFMUser
 from .models import LastfmUser
 import asyncio
-
+PERIOD_DICT = {
+    '7day': "7 days",
+    "1month":"1 month",
+    "3month":"3 months",
+    "6month":"6 months",
+    "12month":"12 months",
+    "overall":"Overall"
+}
 
 def home(request):
     # login_link = authenticate()
@@ -31,17 +38,23 @@ def view_artists(request):
         username = request.POST['username']
         grid_size = int(request.POST['grid'])
         period = request.POST['period']
+        period_verbose = PERIOD_DICT.get(period)
+        size_verbose = f'{grid_size}x{grid_size}'
         try:
             overlay = request.POST['overlay']
         except Exception:
             overlay = 'off'
         artists =   get_artists(username, grid_size, period)
+        print(artists)
         if artists:
             greeting = f'Hi, {username}, here is your Top {grid_size**2} artists grid'
         else:
             greeting = "Couldn't find the user"
 
-        return  render(request, 'artists.html', {'artists':artists, 'greeting':greeting, 'overlay':overlay,'size': grid_size})
+        return  render(request, 'artists.html', {'artists':artists, 'greeting':greeting, 'overlay':overlay,
+                                                 'size': grid_size, 'period': period,
+                                                 'period_verbose':period_verbose,"size_verbose":size_verbose,
+                                                 "username": username})
 
 def view_albums(request):
     if request.method == 'GET':
@@ -50,6 +63,7 @@ def view_albums(request):
         username = request.POST['username']
         grid_size = int(request.POST['grid'])
         period = request.POST['period']
+        period_verbose = PERIOD_DICT.get(period)
         try:
             overlay = request.POST['overlay']
         except Exception:
@@ -69,13 +83,14 @@ def view_tracks(request):
         username = request.POST['username']
         quantity = int(request.POST['quantity'])
         period = request.POST['period']
-
+        period_verbose = PERIOD_DICT.get(period)
         track_list = get_top_tracks(username, quantity, period)
         if track_list:
             greeting = f'Hi, {username}, here is your Top {quantity} tracks chart'
         else:
             greeting = "Couldn't find the user"
-        return render(request, 'tracks.html', {'tracks': track_list, 'greeting': greeting, 'quantity':quantity})
+        return render(request, 'tracks.html', {'tracks': track_list, 'greeting': greeting, 'quantity':quantity,
+                                               "username": username, "period":period, "period_verbose": period_verbose})
 
 
 
