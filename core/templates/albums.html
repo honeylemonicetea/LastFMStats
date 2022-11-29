@@ -8,7 +8,7 @@ ALBUMS
     <div class="content-padding">
         <div class="form-container">
             <h1>enter your last.fm username</h1>
-            <form action="" method="post">
+            <form action="" method="post" autocomplete="off">
                 {% csrf_token %}
                 <p>
                     <input type="search" placeholder="Last.fm username" name="username" value="{{username}}">

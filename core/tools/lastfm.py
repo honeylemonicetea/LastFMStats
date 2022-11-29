@@ -2,19 +2,12 @@ import requests
 import environ
 import time
 from datetime import datetime
-from core.models import Artist
-import aiohttp
-import asyncio
 
-# todo: UNCOMMENT
-try:
-    from .spotifyapi import get_artist_image, get_track_info
-    from .lastfm_images import get_image
-except Exception:
-    pass
+from .spotifyapi import get_artist_image, get_track_info
+
 
 env = environ.Env()
-environ.Env.read_env('D:/Coding/PycharmProjects/NEW OWN PROJECTS/LASTFMKITTY/lastfmkitty/.env')
+environ.Env.read_env('/Users/pinya/PycharmProjects/GitHubStuff/LastFMStats/core/tools/.env')
 
 API_ROOT = 'http://ws.audioscrobbler.com/2.0/'
 CALLBACK_URL = 'http://127.0.0.1:8000/'
@@ -23,8 +16,6 @@ MB_ROOT = 'https://musicbrainz.org/ws/2/'
 headers = {
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
 }
-
-
 """
     ARTISTS 
 """
@@ -75,72 +66,9 @@ def get_artists(username, size=3, period='overall'):
                 print('index error')
         print(f"Artist fetch time: {time.time()-start}")
         return artists
-    except Exception:
+    except Exception as e:
+        print(f"The error is {e}")
         return None
-
-"""
-    OBSOLETE
-"""
-# def get_top3_ART(username='BellaLeto'):
-#     top_3_artists = []
-#     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
-#                                        'method': 'user.gettopartists', 'period': 'overall', 'limit': '3'})
-#     content = r.json()
-#     number_one = ''
-#     image_one = ''
-#     for i in range(3):
-#         artist_info = dict()
-#         artist_name = content['topartists']['artist'][i]['name']
-#         artist_playcount = content['topartists']['artist'][i]['playcount']
-#         artist_url = content['topartists']['artist'][i]['url']
-#         try:
-#             # artist_image, code = get_image(artist_name)
-#             # if code != 200:
-#
-#             # artist_db = Artist.objects.get(name=artist_name)
-#             # artist_image = artist_db.photo_url
-#             artist_country = ''
-#             artist_image = ''
-#             flag = ''
-#             found = False
-#             with open('artist_inf.csv', "r", encoding='utf-8') as file:
-#                 info = file.readlines()
-#
-#             for line in info:
-#                 line_split = line.split('|')
-#                 if line_split[0] == artist_name:
-#                     artist_image = line_split[1]
-#                     artist_country = line_split[3]
-#
-#                     found = True
-#                     break
-#
-#             if found == False:
-#                 raise Exception
-#
-#
-#         except Exception:
-#             # artist_image = get_artist_image(artist_name)
-#             artist_image = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
-#             artist_country = 'Unknown'
-#
-#         artst_more = time.time()
-#         # artist_country, artist_city, artist_begin, artist_end, inactive = get_mb_info(artist_name)
-#         # flag_url = get_country_flag(artist_country)
-#
-#         artist_info['id'] = i + 1
-#         artist_info['artist_name'] = artist_name
-#         artist_info['playcount'] = artist_playcount
-#         artist_info['artist_url'] = artist_url
-#         artist_info['artist_image'] = artist_image
-#         artist_info['country'] = artist_country
-#         # artist_info['flag_url'] = flag_url
-#
-#
-#         top_3_artists.append(artist_info)
-#
-#
-#     return top_3_artists
 
 def get_more_inf_ART(artist_name):
     start_time = time.time()
@@ -201,52 +129,6 @@ def album_more_info(album_name, artist_name):
     description = content['album']['wiki']['content']
 
     return playcount, listener_count, ratio, description
-
-
-# def top_three_albums(username):
-#     r = requests.get(API_ROOT, params={'api_key': env('API_KEY'), 'user': username, 'format': 'json',
-#                                        'method': 'user.gettopalbums', 'period': 'overall', 'limit': '3'})
-#     content = r.json()
-#     two_albs = []
-#     top_one = dict()
-#     for i in range(3):
-#         album_info = dict()
-#         album_title = content['topalbums']['album'][i]['name']
-#         album_playcount = content['topalbums']['album'][i]['playcount']
-#         album_url = content['topalbums']['album'][i]['url']
-#         album_image = content['topalbums']['album'][i]['image'][3]['#text']
-#         artist_name = content['topalbums']['album'][i]['artist']['name']
-#         if i == 0:
-#             top_one['id'] = i + 1
-#             top_one['album_name'] = album_title
-#             top_one['your_playcount'] = album_playcount  # user's playcount
-#             top_one['album_url'] = album_url
-#             top_one['album_image'] = album_image
-#             playcount, listener_count, ratio, description = album_more_info(album_title, artist_name)
-#             top_one['playcount'] = playcount  # total playcount
-#             top_one['ratio'] = ratio
-#             top_one['listener_count'] = listener_count
-#             top_one['description'] = description
-#             top_one['artist'] = artist_name
-#         else:
-#             album_info['id'] = i + 1
-#             album_info['album_name'] = album_title
-#             album_info['playcount'] = album_playcount
-#             album_info['album_url'] = album_url
-#             album_info['album_image'] = album_image
-#             album_info['artist'] = artist_name
-#             two_albs.append(album_info)
-#     # TODO: FOR TESTING
-#     # with open("TWO_AL.json", 'w', encoding='utf-8') as file:
-#     #     file.write(str(two_albs))
-#     # with open("one_AL.json", 'w',  encoding='utf-8') as file:
-#     #     file.write(str(top_one))
-#
-#     return two_albs, top_one
-
-# gets more info on the artist
-
-
 
 
 def get_top_tracks(username, quantity=10, period='overall'):
@@ -320,39 +202,4 @@ def get_user(username):
         return user_dict
     except Exception:
         return None
-
-
-# musicbrainz     fmt=json
-
-# entity types:  area, artist, event, genre, instrument, label, place, recording, release, release - group, series, work, url
-#  lookup:   /<ENTITY_TYPE>/<MBID>?inc=<INC>
-#  browse:   /<RESULT_ENTITY_TYPE>?<BROWSING_ENTITY_TYPE>=<MBID>&limit=<LIMIT>&offset=<OFFSET>&inc=<INC>
-#  search:   /<ENTITY_TYPE>?query=<QUERY>&limit=<LIMIT>&offset=<OFFSET>
-
-
-# def get_country(artist_name):
-#     time.sleep(0.1)  # 50 reqs per second limit
-#     r = requests.get(f"{MB_ROOT}artist?", headers=headers, params={'query': artist_name, 'fmt': 'json'})
-#     json_data = r.json()['artists'][0]
-#     artist_id = json_data['id']
-#     # try:
-#     #     artist_city = json_data['begin-area']['name']
-#     # except Exception:
-#     #     artist_city = 'Unknown'
-#     # try:
-#     #     artist_begin = json_data['life-span']['begin']
-#     # except Exception:
-#     #     artist_begin = 'Unknown'
-#     # try:
-#     #     artist_end = json_data['life-span']['end']
-#     #     inactive = json_data['life-span']['ended']
-#     # except Exception:
-#     #     artist_end = False
-#     #     inactive = False
-#     try:
-#         artist_country = json_data['area']['name']
-#     except Exception:
-#         artist_country = 'Unknown'
-#
-#     return artist_country
 

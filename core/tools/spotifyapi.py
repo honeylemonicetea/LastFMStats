@@ -11,7 +11,7 @@ REDIRECT_URI = 'http://localhost/'
 TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
 
 env = environ.Env()
-environ.Env.read_env('D:/Coding/PycharmProjects/NEW OWN PROJECTS/LASTFMKITTY/lastfmkitty/.env')
+environ.Env.read_env('/Users/pinya/PycharmProjects/GitHubStuff/LastFMStats/core/tools/.env')
 
 bytes_id = env('CLIENT_ID').encode('ascii')
 base_id = base64.urlsafe_b64encode(bytes_id)
@@ -39,9 +39,6 @@ def get_artist_image(name):  # SPOTIFY
         'Authorization': f'Bearer {token}'
     }
     params = {'q': name, 'type': 'artist'}
-    #
-    # async with aiohttp.ClientSession() as session:
-    #     async with session.get(WEB_API_SPOT, params=params, headers=headers) as get_art:
     get_art = requests.get(WEB_API_SPOT, params=params, headers=headers)
     artist_info =  get_art.json()
     print(f'{time.time()-start}')
