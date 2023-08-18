@@ -1,5 +1,5 @@
 # LastFMStats
-A <a href='https://stormy-wave-88102.herokuapp.com/'>website</a> for showcasing Last.fm charts.
+A <a href='https://last-fm-charts.onrender.com'>website</a> for showcasing Last.fm charts.
 
 ## How To use
 1. Choose the Category from the menu above
